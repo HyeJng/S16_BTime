@@ -1,6 +1,7 @@
 package kh.semi.s16.bt.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import kh.semi.s16.bt.dao.BookDao;
 import kh.semi.s16.bt.jdbcDriver.JdbcTemplate;
@@ -30,4 +31,19 @@ public class BookService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	public List<BookVo> selectList(){
+		List<BookVo> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = dao.selectList(conn);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
+	public BookVo selectOne(String isbn) {
+		BookVo vo = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vo = dao.selectOne(conn, isbn);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
+	
 }

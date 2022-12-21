@@ -1,6 +1,7 @@
 package kh.semi.s16.bt.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import kh.semi.s16.bt.dao.SubscribeDao;
 import kh.semi.s16.bt.jdbcDriver.JdbcTemplate;
@@ -29,5 +30,19 @@ public class SubscribeService {
 		result = dao.delete(conn, subType);
 		JdbcTemplate.close(conn);
 		return result;
+	}
+	public List<SubscribeVo> selectList(){
+		List<SubscribeVo> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = dao.selectList();
+		JdbcTemplate.close(conn);
+		return volist;
+	}
+	public SubscribeVo selectOne(int subType) {
+		SubscribeVo vo = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vo = dao.selectOne(subType);
+		JdbcTemplate.close(conn);
+		return vo;
 	}
 }
