@@ -34,14 +34,14 @@ public class SubscribeService {
 	public List<SubscribeVo> selectList(){
 		List<SubscribeVo> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
-		volist = dao.selectList();
+		volist = dao.selectList(conn);
 		JdbcTemplate.close(conn);
 		return volist;
 	}
 	public SubscribeVo selectOne(int subType) {
 		SubscribeVo vo = null;
 		Connection conn = JdbcTemplate.getConnection();
-		vo = dao.selectOne(subType);
+		vo = dao.selectOne(conn,subType);
 		JdbcTemplate.close(conn);
 		return vo;
 	}
