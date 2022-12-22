@@ -1,6 +1,6 @@
 package kh.semi.s16.bt.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ReadingNowVo {
 //	 READ_PAGE 	NUMBER	DEFAULT 0	NOT NULL,

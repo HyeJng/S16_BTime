@@ -50,11 +50,11 @@ public class MemberDao {
 				"PWD=?,NAME=?EMAIL=?ISSUB=? WHERE ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "PWD");
-			pstmt.setString(2, "NAME");
-			pstmt.setString(3, "EMAIL");
-			pstmt.setString(4, "ISSUB");
-			pstmt.setString(5, "ID");
+			pstmt.setString(1, m.getPwd());
+			pstmt.setString(2, m.getName());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getIssub());
+			pstmt.setString(5, m.getId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,10 +66,10 @@ public class MemberDao {
 	public int delete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "DELETE * FROM MEMBER WHERE ID=?";
+		String query = "DELETE FROM MEMBER WHERE ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "ID");
+			pstmt.setString(1, id);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

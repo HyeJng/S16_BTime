@@ -1,6 +1,6 @@
 package kh.semi.s16.bt.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ReviewVo {
 //	 REV_NUM 	NUMBER		NOT NULL,
