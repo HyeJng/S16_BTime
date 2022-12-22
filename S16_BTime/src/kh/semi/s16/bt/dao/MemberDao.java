@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import kh.semi.s16.bt.jdbcDriver.JdbcTemplate;
+import static kh.semi.s16.bt.jdbcDriver.JdbcTemplate.*;
 import kh.semi.s16.bt.model.MemberVo;
 
 
@@ -36,28 +37,101 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
+			close(rs);
+			close(pstmt);
 		}
 		return m;
 	}
 	
 	public int update(Connection conn, MemberVo m) {
+		PreparedStatement pstmt = null;
 		int result = 0;
+		String query = "UPDATE MEMBER SET"+
+				"PWD=?,NAME=?EMAIL=?ISSUB=? WHERE ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "PWD");
+			pstmt.setString(2, "NAME");
+			pstmt.setString(3, "EMAIL");
+			pstmt.setString(4, "ISSUB");
+			pstmt.setString(5, "ID");
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	public int delete(Connection conn, String id) {
+		PreparedStatement pstmt = null;
 		int result = 0;
+		String query = "DELETE * FROM MEMBER WHERE ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "ID");
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 //	selectList  - 목록조회
 	public List<MemberVo> selectList(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		List<MemberVo> volist = null;
+		String query = "SELECT * FROM MEMBER";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<MemberVo>();
+				do {
+					MemberVo vo = new MemberVo();
+					vo.setId(rs.getString("ID"));
+					vo.setPwd(rs.getString("PWD"));
+					vo.setName(rs.getString("NAME"));
+					vo.setEmail(rs.getString("EMAIL"));
+					vo.setIssub(rs.getString("ISSUB"));
+					volist.add(vo);
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
 		return volist;
 	}
 //	selectOne - 상세조회
 	public MemberVo selectOne(Connection conn, String mid){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		MemberVo vo = null;
+		String query = "SELECT * FROM MEMBER WHERE ID=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "ID");
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new MemberVo();
+				vo.setPwd(rs.getString("PWD"));
+				vo.setName(rs.getString("NAME"));
+				vo.setEmail(rs.getString("EMAIL"));
+				vo.setIssub(rs.getString("ISSUB"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
 		return vo;
 	}
 //	selectOne - login - 상세조회
@@ -82,8 +156,8 @@ public class MemberDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(pstmt);
+			close(rs);
+			close(pstmt);
 		}
 		
 		
