@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import kh.semi.s16.bt.dao.BookDao;
-import kh.semi.s16.bt.jdbcDriver.JdbcTemplate;
+import static kh.semi.s16.bt.jdbcDriver.JdbcTemplate.*;
 import kh.semi.s16.bt.model.BookVo;
 
 public class BookService {
@@ -12,37 +12,43 @@ public class BookService {
 	
 	public int insert(BookVo b) {
 		int result = 0;
-		Connection conn = JdbcTemplate.getConnection();
+		Connection conn = getConnection();
 		result = dao.insert(conn, b);
-		JdbcTemplate.close(conn);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
 	public int update(BookVo b) {
 		int result = 0;
-		Connection conn = JdbcTemplate.getConnection();
+		Connection conn = getConnection();
 		result = dao.update(conn, b);
-		JdbcTemplate.close(conn);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
 	public int delete(String isbn) {
 		int result = 0;
-		Connection conn = JdbcTemplate.getConnection();
+		Connection conn = getConnection();
 		result = dao.delete(conn, isbn);
-		JdbcTemplate.close(conn);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
 	public List<BookVo> selectList(){
 		List<BookVo> volist = null;
-		Connection conn = JdbcTemplate.getConnection();
+		Connection conn = getConnection();
 		volist = dao.selectList(conn);
-		JdbcTemplate.close(conn);
+		close(conn);
 		return volist;
 	}
 	public BookVo selectOne(String isbn) {
 		BookVo vo = null;
-		Connection conn = JdbcTemplate.getConnection();
+		Connection conn = getConnection();
 		vo = dao.selectOne(conn, isbn);
-		JdbcTemplate.close(conn);
+		close(conn);
 		return vo;
 	}
 	
