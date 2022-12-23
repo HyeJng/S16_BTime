@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.s16.bt.service.BookService;
+import kh.semi.s16.bt.service.MemberService;
+
 /**
  * Servlet implementation class BookDeleteDoController
  */
@@ -27,7 +30,9 @@ public class BookDeleteDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String id = "";  // TODO:
+		BookService service = new BookService();
+		int result = service.delete(id);
 	}
 
 }

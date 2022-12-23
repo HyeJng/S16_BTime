@@ -19,7 +19,6 @@ public class ReadingNowUpdateDoController extends HttpServlet {
      */
     public ReadingNowUpdateDoController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -27,7 +26,7 @@ public class ReadingNowUpdateDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//TODO
 	}
 
 }

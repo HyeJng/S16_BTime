@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReviewUpdateDoController
+ * Servlet implementation class ReadingNowDeleteDoController
  */
-@WebServlet("/ReviewUpdateDoController")
-public class ReviewUpdateDoController extends HttpServlet {
+@WebServlet("/ReadingNowDeleteDoController")
+public class ReadingNowDeleteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewUpdateDoController() {
+    public ReadingNowDeleteDoController() {
         super();
     }
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

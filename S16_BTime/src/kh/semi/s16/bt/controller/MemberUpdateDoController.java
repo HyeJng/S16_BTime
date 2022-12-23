@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.s16.bt.model.MemberVo;
 import kh.semi.s16.bt.service.MemberService;
@@ -22,7 +23,6 @@ public class MemberUpdateDoController extends HttpServlet {
      */
     public MemberUpdateDoController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -30,10 +30,18 @@ public class MemberUpdateDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVo m = new MemberVo();  //TODO:
-		String id = "";  // TODO:
+		HttpSession session = request.getSession(false);
 		MemberService service = new MemberService();
+		
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String issub = request.getParameter("issub");
+		
+		MemberVo m = new MemberVo();
 		int result = service.update(m);
+		//TODO
 	}
 
 }
