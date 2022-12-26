@@ -31,7 +31,7 @@ public class LoveAddDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "UPDATE LOVE_ADD SET" + 
-				"ISBN=? WHERE ID=?	";
+				"ISBN=? WHERE ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, vo.getIsbn());
@@ -44,14 +44,14 @@ public class LoveAddDao {
 		}
 		return result;
 	}
-	public int delete(Connection conn, String id) {
+	public int delete(Connection conn, String id, String isbn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "DELETE FROM LOVE_ADD WHERE ID=?";
+		String query = "DELETE FROM LOVE_ADD WHERE ID=? AND ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(1, id);
-//			pstmt.setString(2, isbn);
+			pstmt.setString(1, id);
+			pstmt.setString(2, isbn);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,16 +60,15 @@ public class LoveAddDao {
 		}
 		return result;
 	}
-	public List<LoveAddVo> selectList(Connection conn) {
+	public List<LoveAddVo> selectList(Connection conn, String id) {
 		List<LoveAddVo> volist = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "INSERT INTO LOVE_ADD VALUES(?, ?)";
+		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK K ON L.ISBN=B.ISBN WHERE L.ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(1, id);
-//			pstmt.setString(2, isbn);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,16 +78,16 @@ public class LoveAddDao {
 		}
 		return volist;
 	}
-	public LoveAddVo selectOne(Connection conn, String id) {
+	public LoveAddVo selectOne(Connection conn, String id, String isbn) {
 		LoveAddVo vo = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "INSERT INTO LOVE_ADD VALUES(?, ?)";
+		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK B ON L.ISBN=B.ISBN WHERE ID=? AND ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(1, id);
-//			pstmt.setString(2, isbn);
+			pstmt.setString(1, id);
+			pstmt.setString(2, isbn);
 			rs = pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();

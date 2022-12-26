@@ -28,26 +28,26 @@ public class LoveAddService {
 		close(conn);
 		return result;
 	}
-	public int delete(String id) {
+	public int delete(String id, String isbn) {
 		int result = 0;
 		Connection conn = null;
-		result = dao.delete(conn, id);
+		result = dao.delete(conn, id, isbn);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
-	public List<LoveAddVo> selectList() {
+	public List<LoveAddVo> selectList(String id) {
 		List<LoveAddVo> result = null;
 		Connection conn = null;
-		result = dao.selectList(conn);
+		result = dao.selectList(conn, id);
 		close(conn);
 		return result;
 	}
-	public LoveAddVo selectOne(String id) {
+	public LoveAddVo selectOne(String id, String isbn) {
 		LoveAddVo result = null;
 		Connection conn = null;
-		result = dao.selectOne(conn, id);
+		result = dao.selectOne(conn, id, isbn);
 		close(conn);
 		return result;
 	}
