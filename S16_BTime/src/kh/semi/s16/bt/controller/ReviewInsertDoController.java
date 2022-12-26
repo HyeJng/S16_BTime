@@ -38,9 +38,11 @@ public class ReviewInsertDoController extends HttpServlet {
 		ReviewVo review = new ReviewVo();
 		
 		//int rev_num -> 자동으로 쌓이는거 아닌가? 그럼 ddl.dml에서 rnum같은거로 설정해줘야 하는거 아님????//TODO
+		String isbn = request.getParameter("isbn");
 		String rev_txt = request.getParameter("rev_txt");
 		Date rev_date = null;
 		int each_grade = Integer.parseInt(request.getParameter("each_grade"));
+		String id = request.getParameter("id");
 		
 		String fmRev_date = request.getParameter("rev_date");
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -50,9 +52,11 @@ public class ReviewInsertDoController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		review.setIsbn(isbn);
 		review.setRev_txt(rev_txt);
 		review.setRev_date(rev_date);
 		review.setEach_grade(each_grade);
+		review.setId(id);
 		
 		int result = service.insert(review);
 		//TODO
