@@ -16,13 +16,15 @@ public class ReviewDao {
 	public int insert(Connection conn, ReviewVo review) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO REVIEW VALUES(?,?,?,?)";
+		String query = "INSERT INTO REVIEW VALUES(?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, review.getRev_num());
-			pstmt.setString(2, review.getRev_txt());
-			pstmt.setDate(3, review.getRev_date());
-			pstmt.setInt(4, review.getEach_grade());
+			pstmt.setString(2, review.getIsbn());
+			pstmt.setString(3, review.getRev_txt());
+			pstmt.setDate(4, review.getRev_date());
+			pstmt.setInt(5, review.getEach_grade());
+			pstmt.setString(6, review.getId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,13 +37,15 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "UPDATE REVIEW SET" +
-				"REV_NUM=?,REV_TXT=?,REV_DATE=?,EACH_GRAD=?";
+				"REV_NUM=?,REV_TXT=?,REV_DATE=?,EACH_GRAD=?,ID=? WHERE ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, review.getRev_num());
 			pstmt.setString(2, review.getRev_txt());
 			pstmt.setDate(3, review.getRev_date());
 			pstmt.setInt(4, review.getEach_grade());
+			pstmt.setString(5, review.getId());
+			pstmt.setString(6, review.getIsbn());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,13 +54,14 @@ public class ReviewDao {
 		}
 		return result;
 	}
-	public int delete(Connection conn, int rNum) {
+	public int delete(Connection conn, String isbn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "DELETE FROM REVIEW WHERE REV_NUM=?";
+		String query = "DELETE FROM REVIEW WHERE ISBN=? AND ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, rNum);
+			pstmt.setString(1, isbn);
+			pstmt.setString(1, id);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,9 +83,11 @@ public class ReviewDao {
 				do {
 					ReviewVo vo = new ReviewVo();
 					vo.setRev_num(rs.getInt("rev_num"));
+					vo.setIsbn(rs.getString("ISBN"));
 					vo.setRev_txt(rs.getString("rev_txt"));
 					vo.setRev_date(rs.getDate("rev_date"));
 					vo.setEach_grade(rs.getInt("each_grade"));
+					vo.setId(rs.getString("ID"));
 					volist.add(vo);
 				}while(rs.next());
 			}
@@ -92,14 +99,14 @@ public class ReviewDao {
 		}
 		return volist;
 	}
-	public ReviewVo selectOne(Connection conn, int rNum) {
+	public ReviewVo selectOne(Connection conn, String isbn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ReviewVo vo = null;
-		String query = "SELECT * FROM REVIEW WHERE REV_NUM=?";
+		String query = "SELECT * FROM REVIEW WHERE ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, rNum);
+			pstmt.setString(1, isbn);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				vo = new ReviewVo();

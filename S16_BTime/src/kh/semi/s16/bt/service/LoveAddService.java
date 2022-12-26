@@ -1,8 +1,9 @@
-package kh.semi.s16.bt.dao;
+package kh.semi.s16.bt.service;
 
 import java.sql.Connection;
 import java.util.List;
 
+import kh.semi.s16.bt.dao.LoveAddDao;
 import kh.semi.s16.bt.model.LoveAddVo;
 
 import static kh.semi.s16.bt.jdbcDriver.JdbcTemplate.*;

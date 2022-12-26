@@ -33,6 +33,8 @@ public class MemberDao {
 				m.setName(rs.getString("NAME"));
 				m.setEmail(rs.getString("EMAIL"));
 				m.setIssub(rs.getString("ISSUB"));
+				m.setSubstr_date(rs.getDate("SUBSTR_DATE"));
+				m.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,14 +49,16 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "UPDATE MEMBER SET"+
-				"PWD=?,NAME=?EMAIL=?ISSUB=? WHERE ID=?";
+				"PWD=?,NAME=?EMAIL=?ISSUB=?,SUBSTR_DATE=?,SUBEND_DATE=? WHERE ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getPwd());
 			pstmt.setString(2, m.getName());
 			pstmt.setString(3, m.getEmail());
 			pstmt.setString(4, m.getIssub());
-			pstmt.setString(5, m.getId());
+			pstmt.setDate(5, m.getSubstr_date());
+			pstmt.setDate(6, m.getSubend_date());
+			pstmt.setString(7, m.getId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,6 +101,8 @@ public class MemberDao {
 					vo.setName(rs.getString("NAME"));
 					vo.setEmail(rs.getString("EMAIL"));
 					vo.setIssub(rs.getString("ISSUB"));
+					vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
+					vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 					volist.add(vo);
 				}while(rs.next());
 			}
@@ -125,6 +131,8 @@ public class MemberDao {
 				vo.setName(rs.getString("NAME"));
 				vo.setEmail(rs.getString("EMAIL"));
 				vo.setIssub(rs.getString("ISSUB"));
+				vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
+				vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,6 +160,8 @@ public class MemberDao {
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
 				vo.setIssub(rs.getString("issub"));
+				vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
+				vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

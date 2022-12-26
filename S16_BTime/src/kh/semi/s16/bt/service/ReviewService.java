@@ -28,10 +28,10 @@ public class ReviewService {
 		close(conn);
 		return result;
 	}
-	public int delete(int rNum) {
+	public int delete(String isbn, String id) {
 		int result = 0;
 		Connection conn = getConnection();
-		result = dao.delete(conn, rNum);
+		result = dao.delete(conn, isbn, id);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -44,10 +44,10 @@ public class ReviewService {
 		close(conn);
 		return volist;
 	}
-	public ReviewVo selectOne(int rNum) {
+	public ReviewVo selectOne(String isbn) {
 		ReviewVo vo = null;
 		Connection conn = getConnection();
-		vo = dao.selectOne(conn, rNum);
+		vo = dao.selectOne(conn, isbn);
 		close(conn);
 		return vo;
 	}
