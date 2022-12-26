@@ -11,6 +11,20 @@ import kh.semi.s16.bt.model.vo.BookVo;
 public class BookService {
 	private BookDao dao = new BookDao();
 	
+	public int insert(List<BookVo> blist) {
+		int result = 0;
+		Connection conn = getConnection();
+//		setAutoCommit(conn, false);
+//		result = dao.insertAll(conn, blist);
+		for(BookVo b: blist) {
+			result = dao.insert(conn, b);
+		}
+//		if(result > 0) commit(conn);
+//		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	public int insert(BookVo b) {
 		int result = 0;
 		Connection conn = getConnection();

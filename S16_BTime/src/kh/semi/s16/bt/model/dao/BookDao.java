@@ -14,6 +14,41 @@ import kh.semi.s16.bt.model.vo.BookVo;
 public class BookDao {
 	public BookDao() {
 	}
+	
+	public int insertAll(Connection conn, List<BookVo> blist) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT ALL ";
+		for(BookVo b: blist) {
+			query += "  INTO BOOK VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		}
+		query += " select * from dual";
+		try {
+			pstmt = conn.prepareStatement(query);
+			int idx = 1;
+			for(BookVo b: blist) {
+				pstmt.setString(idx++, b.getIsbn());
+				pstmt.setString(idx++, b.getThum_img());
+				pstmt.setString(idx++, b.getBook_name());
+				pstmt.setString(idx++, b.getAuthor());
+				pstmt.setString(idx++, b.getPublisher());
+				pstmt.setString(idx++, b.getCategory());
+				pstmt.setString(idx++, b.getBook_intro());
+				pstmt.setString(idx++, b.getAuth_intro());
+				pstmt.setString(idx++, b.getPub_intro());
+				pstmt.setInt(idx++, b.getBook_page());
+				pstmt.setDouble(idx++, b.getTotal_grade());
+				pstmt.setInt(idx++, b.getGrade_peo());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	public int insert(Connection conn, BookVo b) {
 		PreparedStatement pstmt = null;
