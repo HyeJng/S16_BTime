@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.s16.bt.service.ReadingNowService;
+
 /**
  * Servlet implementation class ReadingNowDeleteDoController
  */
@@ -25,7 +27,19 @@ public class ReadingNowDeleteDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO
+		System.out.println("readingnow delete do controller");
+		
+		ReadingNowService service = new ReadingNowService();
+		String id = request.getParameter("id");
+		String isbn = request.getParameter("isbn");
+		int result = service.delete(id, isbn);
+		
+		if(result > 0) {
+			String viewPage = "/WEB-INF/view/MyPage/readingnow.jsp";
+			response.sendRedirect(viewPage);
+		}else {
+			//TODO
+		}
 	}
 
 }

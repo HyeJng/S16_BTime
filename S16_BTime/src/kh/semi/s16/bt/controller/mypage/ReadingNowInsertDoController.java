@@ -33,6 +33,8 @@ public class ReadingNowInsertDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("readingnow insert do controller");
+		
 		ReadingNowService service = new ReadingNowService();
 		ReadingNowVo rn = new ReadingNowVo();
 		
@@ -51,7 +53,12 @@ public class ReadingNowInsertDoController extends HttpServlet {
 		rn.setReadstr_date(readstr_date);
 		
 		int result = service.insert(rn);
-		//TODO
+		if(result > 0) {
+			String viewPage = "/WEB-INF/view/MyPage/readingnow.jsp";
+			response.sendRedirect(viewPage);
+		}else {
+			//TODO
+		}
 	}
 
 }

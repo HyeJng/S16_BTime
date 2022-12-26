@@ -31,7 +31,7 @@
 		</div>
 		<div>
 			<button type="button">찜</button>
-			<button type="button">도서 읽기</button>
+			<button type="button">도서 읽기</button> <!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
 		</div>
 	</div>
 </body>

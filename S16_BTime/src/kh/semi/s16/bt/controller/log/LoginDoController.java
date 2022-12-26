@@ -16,7 +16,7 @@ import kh.semi.s16.bt.service.MemberService;
 /**
  * Servlet implementation class LoginDoController
  */
-@WebServlet("/LoginDoController")
+@WebServlet("/Login.do")
 public class LoginDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,6 @@ public class LoginDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
 		MemberService service = new MemberService();
-		PrintWriter out = response.getWriter();
 		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
@@ -42,11 +41,11 @@ public class LoginDoController extends HttpServlet {
 		if(m != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", m);
-			out.append("success");
+			String viewPage = "WEB-INF/view/index.jsp";
+			request.getRequestDispatcher(viewPage).forward(request, response);
 		}else {
-			out.append("fail");
+			//TODO
 		}
-		//TODO
 	}
 
 }

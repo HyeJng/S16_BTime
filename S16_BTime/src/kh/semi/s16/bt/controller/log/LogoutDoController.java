@@ -26,11 +26,11 @@ public class LogoutDoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage = "/WEB-INF/index.jsp";
 		HttpSession session = request.getSession(false);
 		if(session != null) {
 			session.invalidate();
 		}
+		String viewPage = "/WEB-INF/index.jsp";
 		response.sendRedirect(viewPage);
 	}
 }

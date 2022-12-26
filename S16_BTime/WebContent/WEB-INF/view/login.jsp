@@ -10,8 +10,8 @@
 	<div>
 		<form action="" method="post">
 			<label>로그인</label>
-			<input type="text" id="id">아이디
-			<input type="password" id="pwd">패스워드
+			<input type="text" id="id" name="id">아이디
+			<input type="password" id="pwd" name="pwd">패스워드
 			<button type="submit" id="login">로그인</button>
 		</form>
 	</div>
