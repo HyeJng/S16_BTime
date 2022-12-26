@@ -1,14 +1,14 @@
 package kh.semi.s16.bt.model;
 
-public class LoveAdd {
+public class LoveAddVo {
 //	 ID 	VARCHAR2(12)		NOT NULL,
 //	 ISBN 	VARCHAR2(13)		NOT NULL
 	private String id;
 	private String isbn;
-	public LoveAdd() {
+	public LoveAddVo() {
 		super();
 	}
-	public LoveAdd(String id, String isbn) {
+	public LoveAddVo(String id, String isbn) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
