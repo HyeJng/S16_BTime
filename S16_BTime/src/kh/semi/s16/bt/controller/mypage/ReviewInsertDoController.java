@@ -59,7 +59,11 @@ public class ReviewInsertDoController extends HttpServlet {
 		review.setId(id);
 		
 		int result = service.insert(review);
-		//TODO
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath()+"/detail");
+		}else {
+			//TODO
+		}
 	}
 
 }

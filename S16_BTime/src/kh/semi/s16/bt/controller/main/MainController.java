@@ -19,15 +19,14 @@ public class MainController extends HttpServlet {
      */
     public MainController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage = "/WEB-INF/index.jsp";
-		response.sendRedirect(viewPage);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String viewPage = "/WEB-INF/view/index.jsp";
+		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 
 }

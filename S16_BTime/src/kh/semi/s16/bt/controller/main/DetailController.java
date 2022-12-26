@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.s16.bt.model.BookVo;
+import kh.semi.s16.bt.service.BookService;
+
 /**
  * Servlet implementation class DetailController
  */
@@ -19,23 +22,16 @@ public class DetailController extends HttpServlet {
      */
     public DetailController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		BookService service = new BookService();
+		String isbn = request.getParameter("isbn");
+		BookVo vo = service.selectOne(isbn);
+		String viewPage = "/WEB-INF/view/detail.jsp";
+		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
