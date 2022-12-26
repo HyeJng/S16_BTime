@@ -108,6 +108,8 @@ public class ReadingNowDao {
 				vo = new ReadingNowVo();
 				vo.setRead_page(rs.getInt("READ_PAGE"));
 				vo.setReadstr_date(rs.getDate("READSTR_DATE"));
+				vo.setId(rs.getString("ID"));
+				vo.setIsbn(rs.getString("ISBN"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

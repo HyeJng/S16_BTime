@@ -146,7 +146,7 @@ public class MemberDao {
 	public MemberVo login(Connection conn, String id, String pwd){
 		MemberVo vo = null;
 
-		String query = "select id,name,email,issub from MEMBER where id=? and pwd=?";
+		String query = "select * from MEMBER where id=? and pwd=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {

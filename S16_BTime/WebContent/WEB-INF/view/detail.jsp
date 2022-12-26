@@ -29,6 +29,10 @@
 			<p id="pub_intro"></p>
 			<p id="auth_intro"></p>
 		</div>
+		<div>
+			<button type="button">찜</button>
+			<button type="button">도서 읽기</button>
+		</div>
 	</div>
 </body>
 </html>
