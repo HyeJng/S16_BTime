@@ -17,7 +17,7 @@ import kh.semi.s16.bt.service.ReadingNowService;
 /**
  * Servlet implementation class ReadingNowInsertDoController
  */
-@WebServlet("/ReadingNowInsertDoController")
+@WebServlet("/readingnow")
 public class ReadingNowInsertDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

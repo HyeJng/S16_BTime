@@ -12,7 +12,7 @@ import kh.semi.s16.bt.service.ReadingNowService;
 /**
  * Servlet implementation class ReadingNowDeleteDoController
  */
-@WebServlet("/ReadingNowDeleteDoController")
+@WebServlet("/readingnow")
 public class ReadingNowDeleteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

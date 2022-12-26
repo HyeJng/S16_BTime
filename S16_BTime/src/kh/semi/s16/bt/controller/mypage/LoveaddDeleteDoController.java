@@ -12,7 +12,7 @@ import kh.semi.s16.bt.service.LoveAddService;
 /**
  * Servlet implementation class LoveaddDeleteDoController
  */
-@WebServlet("/LoveaddDeleteDoController")
+@WebServlet("/loveadd")
 public class LoveaddDeleteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
