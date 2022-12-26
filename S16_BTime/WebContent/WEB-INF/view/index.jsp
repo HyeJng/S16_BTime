@@ -15,6 +15,10 @@
 			<button type="button" id="logout">로그아웃</button>
 			<button type="button" id="mypage">마이페이지</button>
 		</div>
+		${volistbest }
+		<hr>
+		${volistai }
+		<hr>
 		<div>
 			<img alt="" src="">
 			<div>

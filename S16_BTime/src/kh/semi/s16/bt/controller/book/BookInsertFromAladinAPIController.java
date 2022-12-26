@@ -124,44 +124,44 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	        		String nodeName = n.getNodeName();
 	        		String nodeText = n.getTextContent();
 	        		try {
-		        		switch(nodeName) {
-		        		case "deathCnt":
-		        			vo.setDeathCnt(Long.parseLong(nodeText));
-		        			break;
-		        		case "defCnt":
-		        			vo.setDefCnt(Long.parseLong(nodeText));
-		        			break;
-		        		case "gubun":
-		        			vo.setGubun(nodeText);
-		        			break;
-		        		case "gubunCn":
-		        			vo.setGubunCn(nodeText);
-		        			break;
-		        		case "gubunEn":
-		        			vo.setGubunEn(nodeText);
-		        			break;
-		        		case "incDec":
-		        			vo.setIncDec(Long.parseLong(nodeText));
-		        			break;
-		        		case "isolClearCnt":
-		        			vo.setIsolClearCnt(Long.parseLong(nodeText));
-		        			break;
-		        		case "isolIngCnt":
-		        			vo.setIsolIngCnt(Long.parseLong(nodeText));
-		        			break;
-		        		case "localOccCnt":
-		        			vo.setGubunEn(nodeText);
-		        			break;
-		        		case "overFlowCnt":
-		        			vo.setOverFlowCnt(Long.parseLong(nodeText));
-		        			break;
-		        		case "qurRate":
-		        			vo.setQurRate(Long.parseLong(nodeText));
-		        			break;
-		        		case "stdDay":
-		        			vo.setStdDay(nodeText);
-		        			break;
-		        		}
+//		        		switch(nodeName) {
+//		        		case "deathCnt":
+//		        			vo.setDeathCnt(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "defCnt":
+//		        			vo.setDefCnt(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "gubun":
+//		        			vo.setGubun(nodeText);
+//		        			break;
+//		        		case "gubunCn":
+//		        			vo.setGubunCn(nodeText);
+//		        			break;
+//		        		case "gubunEn":
+//		        			vo.setGubunEn(nodeText);
+//		        			break;
+//		        		case "incDec":
+//		        			vo.setIncDec(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "isolClearCnt":
+//		        			vo.setIsolClearCnt(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "isolIngCnt":
+//		        			vo.setIsolIngCnt(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "localOccCnt":
+//		        			vo.setGubunEn(nodeText);
+//		        			break;
+//		        		case "overFlowCnt":
+//		        			vo.setOverFlowCnt(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "qurRate":
+//		        			vo.setQurRate(Long.parseLong(nodeText));
+//		        			break;
+//		        		case "stdDay":
+//		        			vo.setStdDay(nodeText);
+//		        			break;
+//		        		}
 	        		}catch (Exception e) {
 						e.printStackTrace();
 					}
