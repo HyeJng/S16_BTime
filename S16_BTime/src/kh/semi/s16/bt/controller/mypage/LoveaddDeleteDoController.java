@@ -1,4 +1,4 @@
-package kh.semi.s16.bt.controller;
+package kh.semi.s16.bt.controller.mypage;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,25 +7,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.s16.bt.service.LoveAddService;
+
 /**
- * Servlet implementation class ReviewUpdateDoController
+ * Servlet implementation class LoveaddDeleteDoController
  */
-@WebServlet("/ReviewUpdateDoController")
-public class ReviewUpdateDoController extends HttpServlet {
+@WebServlet("/LoveaddDeleteDoController")
+public class LoveaddDeleteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewUpdateDoController() {
+    public LoveaddDeleteDoController() {
         super();
     }
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LoveAddService service = new LoveAddService();
+		String id = request.getParameter("id");
+		String isbn = request.getParameter("isbn");
+		int result = service.delete(id, isbn);
 		//TODO
 	}
 

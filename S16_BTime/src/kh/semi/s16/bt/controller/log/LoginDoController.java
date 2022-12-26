@@ -1,4 +1,4 @@
-package kh.semi.s16.bt.controller;
+package kh.semi.s16.bt.controller.log;
 
 import java.io.IOException;
 import java.io.PrintWriter;

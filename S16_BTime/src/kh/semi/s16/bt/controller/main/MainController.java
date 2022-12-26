@@ -1,4 +1,4 @@
-package kh.semi.s16.bt.controller;
+package kh.semi.s16.bt.controller.main;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,25 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReviewDeleteDoController
+ * Servlet implementation class MainController
  */
-@WebServlet("/ReviewDeleteDoController")
-public class ReviewDeleteDoController extends HttpServlet {
+@WebServlet("/main")
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewDeleteDoController() {
+    public MainController() {
         super();
+        // TODO Auto-generated constructor stub
     }
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO
+		String viewPage = "/WEB-INF/index.jsp";
+		response.sendRedirect(viewPage);
 	}
 
 }

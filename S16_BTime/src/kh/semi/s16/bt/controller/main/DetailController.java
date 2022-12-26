@@ -1,4 +1,4 @@
-package kh.semi.s16.bt.controller;
+package kh.semi.s16.bt.controller.main;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReviewUpdateController
+ * Servlet implementation class DetailController
  */
-@WebServlet("/ReviewUpdateController")
-public class ReviewUpdateController extends HttpServlet {
+@WebServlet("/detail")
+public class DetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewUpdateController() {
+    public DetailController() {
         super();
         // TODO Auto-generated constructor stub
     }

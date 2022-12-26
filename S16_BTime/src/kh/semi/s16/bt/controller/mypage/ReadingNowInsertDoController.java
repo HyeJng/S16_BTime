@@ -1,4 +1,4 @@
-package kh.semi.s16.bt.controller;
+package kh.semi.s16.bt.controller.mypage;
 
 import java.io.IOException;
 import java.sql.Date;
