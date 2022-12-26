@@ -29,26 +29,26 @@ public class ReadingNowService {
 		return result;
 	}
 	//delete 추가
-	public int delete(String isbn) {
+	public int delete(String id, String isbn) {
 		int result = 0;
 		Connection conn = getConnection();
-		result = dao.delete(conn, isbn);
+		result = dao.delete(conn, id, isbn);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
-	public List<ReadingNowVo> selectList(){
+	public List<ReadingNowVo> selectList(String id){
 		List<ReadingNowVo> volist = null;
 		Connection conn = getConnection();
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn, id);
 		close(conn);
 		return volist;
 	}
-	public ReadingNowVo selectOne(String isbn) {
+	public ReadingNowVo selectOne(String id, String isbn) {
 		ReadingNowVo vo = null;
 		Connection conn = getConnection();
-		vo = dao.selectOne(conn, isbn);
+		vo = dao.selectOne(conn, id, isbn);
 		close(conn);
 		return vo;
 	}
