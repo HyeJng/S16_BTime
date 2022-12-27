@@ -13,11 +13,19 @@
 		<h3>메인 페이지</h3>
 		<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
 		<div>
-			<button type="button" id="login" onclick="/login">로그인</button>
+			<button type="button" id="login">로그인</button>
 			<button type="button" id="logout">로그아웃</button>
 			<button type="button" id="mypage">마이페이지</button>
 		</div>
-
+		<script>
+			$(function(){
+				$('#login').on("click",LoginClickHandler);
+			});
+			function LoginClickHandler(){
+				console.log("LoginClickHandler");
+				location.href = "<%=request.getContextPath()%>/login";
+			}
+		</script>
 		<hr>
 		<br>
 		<h4>best seller</h4>
