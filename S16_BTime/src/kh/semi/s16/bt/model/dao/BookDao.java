@@ -53,7 +53,7 @@ public class BookDao {
 	public int insert(Connection conn, BookVo b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO bOOK VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO bOOK VALUES(?,?,?,?,?  ,?,TO_CLOB(?),?,TO_CLOB(?),?,   ?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getIsbn());
@@ -62,9 +62,9 @@ public class BookDao {
 			pstmt.setString(4, b.getAuthor());
 			pstmt.setString(5, b.getPublisher());
 			pstmt.setString(6, b.getCategory());
-			pstmt.setString(7, b.getBook_intro());
+			pstmt.setString(7, b.getBook_intro());  // clob
 			pstmt.setString(8, b.getAuth_intro());
-			pstmt.setString(9, b.getPub_intro());
+			pstmt.setString(9, b.getPub_intro());  // clob
 			pstmt.setInt(10, b.getBook_page());
 			pstmt.setDouble(11, b.getTotal_grade());
 			pstmt.setInt(12, b.getGrade_peo());

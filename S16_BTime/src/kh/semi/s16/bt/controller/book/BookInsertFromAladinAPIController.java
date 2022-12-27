@@ -23,6 +23,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import kh.semi.s16.bt.model.service.BookService;
 import kh.semi.s16.bt.model.vo.BookVo;
 
 /**
@@ -49,7 +50,9 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 		getAladinApi();
 		
 		out.println("aladin finish");
-		response.sendRedirect(request.getContextPath()+"/main");
+//		response.sendRedirect(request.getContextPath()+"/main");
+		out.flush();
+		out.close();
 	}
 	
 	private void getAladinApi()  {
@@ -94,8 +97,9 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	        urlBuilder.append("&" + URLEncoder.encode("QueryType","UTF-8") + "=" + URLEncoder.encode("Bestseller", "UTF-8")); /*페이지번호*/
 	        urlBuilder.append("&" + URLEncoder.encode("Cover","UTF-8") + "=" + URLEncoder.encode("Big", "UTF-8")); 
 	        urlBuilder.append("&" + URLEncoder.encode("SearchTarget","UTF-8") + "=" + URLEncoder.encode("Book", "UTF-8")); 
-	        urlBuilder.append("&" + URLEncoder.encode("Output","UTF-8") + "=" + URLEncoder.encode("JS", "UTF-8"));  //json 형태
-	        urlBuilder.append("&" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 
+	        urlBuilder.append("&" + URLEncoder.encode("MaxResults","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); 
+	        urlBuilder.append("&" + URLEncoder.encode("Output","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8"));  //xml 형태
+	        urlBuilder.append("&" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); 
 	        urlBuilder.append("&" + URLEncoder.encode("Version","UTF-8") + "=" + URLEncoder.encode("20131101", "UTF-8")); 
 	        
     		// 2.url로 연결
@@ -192,13 +196,15 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	        
 	        
 	        for(BookVo vo : volist) {
-	        	
 	        	System.out.println(vo);
 	        }
-	        
-	        
 
 	        conn.disconnect();
+	        
+	        
+	        BookService service = new BookService();
+	        service.insert(volist);
+	        
     	} catch(IOException e) {
     		e.printStackTrace();
     	}

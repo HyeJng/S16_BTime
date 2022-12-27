@@ -19,9 +19,9 @@ public class JdbcTemplate {
 		try {
 			currentPath = JdbcTemplate.class.getResource("./").getPath();
 			prop.load(new BufferedReader(new FileReader(currentPath + "driver.properties")));
-			Class.forName(prop.getProperty("driver"));
-			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"),
-					prop.getProperty("pwd"));
+			Class.forName(prop.getProperty("db.driver"));
+			conn = DriverManager.getConnection(prop.getProperty("db.url"), prop.getProperty("db.user"),
+					prop.getProperty("db.pwd"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
