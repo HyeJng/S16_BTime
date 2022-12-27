@@ -40,7 +40,7 @@ public class LoginDoController extends HttpServlet {
 		MemberVo m = service.login(id, pwd);
 		if(m != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", m);
+			session.setAttribute("loginInfo", m);
 			response.sendRedirect(request.getContextPath() + "/main");
 		}else {
 			//TODO

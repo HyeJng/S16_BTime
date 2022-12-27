@@ -5,14 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<script src='./js/jquery-3.6.1.js'></script>
 </head>
 <body>
 	<div>
-		<form action="" method="post">
-			<label>로그인</label>
-			<input type="text" id="id" name="id">아이디
-			<input type="password" id="pwd" name="pwd">패스워드
-			<button type="submit" id="login">로그인</button>
+		<form action="/login.do" method="post">
+		<fieldset>
+				<label>로그인</label>
+				<input type="text" id="id" name="id">아이디
+				<input type="password" id="pwd" name="pwd">패스워드
+				<button type="submit" id="login">로그인</button>
+			</fieldset>
 		</form>
 	</div>
 </body>

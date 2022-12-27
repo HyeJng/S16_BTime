@@ -94,7 +94,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
     		// 1.url생성
 	        StringBuilder urlBuilder = new StringBuilder("http://www.aladin.co.kr/ttb/api/ItemList.aspx"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("TTBKey","UTF-8") + "=" + "ttbhagalaz04301822001"); /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("QueryType","UTF-8") + "=" + URLEncoder.encode("Bestseller", "UTF-8")); /*페이지번호*/
+	        urlBuilder.append("&" + URLEncoder.encode("QueryType","UTF-8") + "=" + URLEncoder.encode("BlogBest", "UTF-8")); /*페이지번호*/
 	        urlBuilder.append("&" + URLEncoder.encode("Cover","UTF-8") + "=" + URLEncoder.encode("Big", "UTF-8")); 
 	        urlBuilder.append("&" + URLEncoder.encode("SearchTarget","UTF-8") + "=" + URLEncoder.encode("Book", "UTF-8")); 
 	        urlBuilder.append("&" + URLEncoder.encode("MaxResults","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); 

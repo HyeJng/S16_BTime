@@ -59,6 +59,22 @@ public class BookService {
 		close(conn);
 		return volist;
 	}
+	
+	public List<BookVo> selectListBest(int max){
+		List<BookVo> volist = null;
+		Connection conn = getConnection();
+		volist = dao.selectListBest(conn, max);
+		close(conn);
+		return volist;
+	}
+	
+	public List<BookVo> selectListEssay(int max){
+		List<BookVo> volist = null;
+		Connection conn = getConnection();
+		volist = dao.selectListEssay(conn, max);
+		close(conn);
+		return volist;
+	}
 	public BookVo selectOne(String isbn) {
 		BookVo vo = null;
 		Connection conn = getConnection();
