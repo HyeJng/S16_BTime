@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogoutDoController
  */
-@WebServlet("/logout")
+@WebServlet("/logout.do")
 public class LogoutDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +29,8 @@ public class LogoutDoController extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session != null) {
 			session.invalidate();
+			response.sendRedirect(request.getContextPath()+"/main");
 		}
-		String viewPage = "/WEB-INF/index.jsp";
-		response.sendRedirect(viewPage);
+		
 	}
 }

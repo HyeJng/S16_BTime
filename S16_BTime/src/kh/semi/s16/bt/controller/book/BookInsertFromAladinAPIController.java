@@ -54,6 +54,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	
 	private void getAladinApi()  {
     	try {
+    		//책 한 권
 //    		method : "get",
 //    		dataType : "jsonp",
 //    		url : "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx",
@@ -70,14 +71,32 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 //    			OptResult:"Story,ratingInfo",
 //    			callback : "abc"
 //    		}
+    		
+    		//베스트셀러 목록
+//    		method : "get",
+//    		dataType : "jsonp",
+//    		url : "http://www.aladin.co.kr/ttb/api/ItemList.aspx",
+//    		data : {
+//    			//TTBKey : "ttbcmqlfkd_1542001",
+//    			//TTBKey : "ttbto66931826001",
+//    			TTBKey : "ttbhagalaz04301822001",
+//    			QueryType : "Bestseller",
+//    			SearchTarget:"Book",
+//    			output : "JS",
+//    			start : "1",
+//    			cover: "big",
+//    			Version: "20131101",
+//    			callback : "abc"
+//    		}
     		// 1.url생성
-	        StringBuilder urlBuilder = new StringBuilder("http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx"); /*URL*/
+	        StringBuilder urlBuilder = new StringBuilder("http://www.aladin.co.kr/ttb/api/ItemList.aspx"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("TTBKey","UTF-8") + "=" + "ttbhagalaz04301822001"); /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("ItemId","UTF-8") + "=" + URLEncoder.encode("9791130689890", "UTF-8")); /*페이지번호*/
+	        urlBuilder.append("&" + URLEncoder.encode("QueryType","UTF-8") + "=" + URLEncoder.encode("Bestseller", "UTF-8")); /*페이지번호*/
 	        urlBuilder.append("&" + URLEncoder.encode("Cover","UTF-8") + "=" + URLEncoder.encode("Big", "UTF-8")); 
-	        urlBuilder.append("&" + URLEncoder.encode("Output","UTF-8") + "=" + URLEncoder.encode("JS", "UTF-8")); 
+	        urlBuilder.append("&" + URLEncoder.encode("SearchTarget","UTF-8") + "=" + URLEncoder.encode("Book", "UTF-8")); 
+	        urlBuilder.append("&" + URLEncoder.encode("Output","UTF-8") + "=" + URLEncoder.encode("JS", "UTF-8"));  //json 형태
+	        urlBuilder.append("&" + URLEncoder.encode("start","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 
 	        urlBuilder.append("&" + URLEncoder.encode("Version","UTF-8") + "=" + URLEncoder.encode("20131101", "UTF-8")); 
-	        urlBuilder.append("&" + URLEncoder.encode("OptResult","UTF-8") + "=" + URLEncoder.encode("Story,ratingInfo", "UTF-8")); 
 	        
     		// 2.url로 연결
 	        URL url = new URL(urlBuilder.toString());
@@ -124,44 +143,44 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	        		String nodeName = n.getNodeName();
 	        		String nodeText = n.getTextContent();
 	        		try {
-//		        		switch(nodeName) {
-//		        		case "deathCnt":
-//		        			vo.setDeathCnt(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "defCnt":
-//		        			vo.setDefCnt(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "gubun":
-//		        			vo.setGubun(nodeText);
-//		        			break;
-//		        		case "gubunCn":
-//		        			vo.setGubunCn(nodeText);
-//		        			break;
-//		        		case "gubunEn":
-//		        			vo.setGubunEn(nodeText);
-//		        			break;
-//		        		case "incDec":
-//		        			vo.setIncDec(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "isolClearCnt":
-//		        			vo.setIsolClearCnt(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "isolIngCnt":
-//		        			vo.setIsolIngCnt(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "localOccCnt":
-//		        			vo.setGubunEn(nodeText);
-//		        			break;
-//		        		case "overFlowCnt":
-//		        			vo.setOverFlowCnt(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "qurRate":
-//		        			vo.setQurRate(Long.parseLong(nodeText));
-//		        			break;
-//		        		case "stdDay":
-//		        			vo.setStdDay(nodeText);
-//		        			break;
-//		        		}
+		        		switch(nodeName) {
+		        		case "isbn":
+		        			vo.setIsbn(nodeText);
+		        			break;
+		        		case "cover":
+		        			vo.setThum_img(nodeText);
+		        			break;
+		        		case "title":
+		        			vo.setBook_name(nodeText);
+		        			break;
+		        		case "author":
+		        			vo.setAuthor(nodeText);
+		        			break;
+		        		case "publisher":
+		        			vo.setPublisher(nodeText);
+		        			break;
+		        		case "categoryName":
+		        			vo.setCategory(nodeText);
+		        			break;
+		        		case "description":
+		        			vo.setBook_intro(nodeText);
+		        			break;
+		        		case "a":
+		        			vo.setAuth_intro(nodeText);
+		        			break;
+		        		case "b":
+		        			vo.setPub_intro(nodeText);
+		        			break;
+		        		case "c":
+		        			vo.setBook_page(Integer.parseInt(nodeText));
+		        			break;
+		        		case "customerReviewRank":
+		        			vo.setTotal_grade(Double.parseDouble(nodeText));
+		        			break;
+		        		case "d":
+		        			vo.setGrade_peo(Integer.parseInt(nodeText));
+		        			break;
+		        		}
 	        		}catch (Exception e) {
 						e.printStackTrace();
 					}

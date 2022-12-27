@@ -16,7 +16,7 @@ import kh.semi.s16.bt.model.vo.MemberVo;
 /**
  * Servlet implementation class LoginDoController
  */
-@WebServlet("/Login.do")
+@WebServlet("/login.do")
 public class LoginDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,8 +41,7 @@ public class LoginDoController extends HttpServlet {
 		if(m != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", m);
-			String viewPage = "WEB-INF/view/index.jsp";
-			request.getRequestDispatcher(viewPage).forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/main");
 		}else {
 			//TODO
 		}
