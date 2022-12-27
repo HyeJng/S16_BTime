@@ -144,7 +144,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	        		String nodeText = n.getTextContent();
 	        		try {
 		        		switch(nodeName) {
-		        		case "isbn":
+		        		case "isbn13": //case "itemId":
 		        			vo.setIsbn(nodeText);
 		        			break;
 		        		case "cover":
