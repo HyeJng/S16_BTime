@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<form action="/login.do" method="post">
+		<form action="<%=request.getContextPath() %>/login.do" method="post">
 		<fieldset>
 				<label>로그인</label>
 				<input type="text" id="id" name="id">아이디

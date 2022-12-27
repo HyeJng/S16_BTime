@@ -31,6 +31,7 @@ public class LoginDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("login.do doPost");
 		response.setContentType("application/json;charset=UTF-8");
 		MemberService service = new MemberService();
 		
