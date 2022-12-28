@@ -68,11 +68,16 @@
 	<script>
 			$(function(){
 				$('#login').on("click",LoginClickHandler);
+				$('#logout').on("click",LogoutClickHandler);
 				$('.book_name').on("click",DetailClickHandler);
 			});
 			function LoginClickHandler(){
 				console.log("LoginClickHandler");
 				location.href = "<%=request.getContextPath()%>/login";
+			}
+			function LogoutClickHandler(){
+				console.log("LogoutClickHandler");
+				location.href = "<%=request.getContextPath()%>/logout";
 			}
 			function DetailClickHandler(){
 				console.log("LoginClickHandler");
