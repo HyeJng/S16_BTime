@@ -8,32 +8,25 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <script src='./js/jquery-3.6.1.js'></script>
-<% MemberVo vo = (MemberVo) request.getSession().getAttribute("loginInfo"); %>
+<%
+	MemberVo vo = (MemberVo) request.getSession().getAttribute("loginInfo");
+%>
 </head>
 <body>
 	<div>
 		<h3>메인 페이지</h3>
 		<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
 		<div>
-		<c:choose>
-			<c:when test="${empty loginInfo }">
-				<button type="button" id="login">로그인</button>
-			</c:when>
-			<c:otherwise>
-				<button type="button" id="logout">로그아웃</button>
-				<button type="button" id="mypage">마이페이지</button>
-			</c:otherwise>
-		</c:choose>
+			<c:choose>
+				<c:when test="${empty loginInfo }">
+					<button type="button" id="login">로그인</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="logout">로그아웃</button>
+					<button type="button" id="mypage">마이페이지</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		<script>
-			$(function(){
-				$('#login').on("click",LoginClickHandler);
-			});
-			function LoginClickHandler(){
-				console.log("LoginClickHandler");
-				location.href = "<%=request.getContextPath()%>/login";
-			}
-		</script>
 		<hr>
 		<br>
 		<h4>best seller</h4>
@@ -42,13 +35,14 @@
 				<li>
 					<div class="post_wrapper">
 						<!-- flex -->
-						<div><img src="${book.thum_img }" alt="${book.book_name }"></div>
-						<div class="post_number">${book.isbn }</div>
-						<div class="post_title">${book.book_name }</div>
-						<div class="post_writer">${book.author }</div>
-						<div class="post_date">${book.publisher }</div>
-						<div class="post_date">${book.book_intro }</div>
-
+						<div>
+							<img src="${book.thum_img }" alt="${book.book_name }">
+						</div>
+						<div class="book_isbn">${book.isbn }</div>
+						<div class="book_name">${book.book_name }</div>
+						<div class="book_author">${book.author }</div>
+						<div class="book_publisher">${book.publisher }</div>
+						<div class="book_intro">${book.book_intro }</div>
 					</div>
 				</li>
 			</c:forEach>
@@ -61,30 +55,32 @@
 				<li>
 					<div class="post_wrapper">
 						<!-- flex -->
-						<div><img src="${book.thum_img }" alt="${book.book_name }"></div>
-						<div class="post_number">${book.isbn }</div>
-						<div class="post_title">${book.book_name }</div>
-						<div class="post_writer">${book.author }</div>
-						<div class="post_date">${book.publisher }</div>
-						<div class="post_date">${book.book_intro }</div>
-
+						<div>
+							<img src="${book.thum_img }" alt="${book.book_name }">
+						</div>
+						<div class="book_isbn">${book.isbn }</div>
+						<button type="button" class="book_name">${book.book_name }</button>
+						<div class="book_author">${book.author }</div>
 					</div>
 				</li>
 			</c:forEach>
 		</ul>
 		<hr>
-		<div>
-			<img alt="" src="">
-			<div>
-				<p id="book_name"></p>
-				<p id="author"></p>
-				<br>
-				<div>
-					<p id="total_grade"></p>
-					<p id="grade_peo"></p>
-				</div>
-			</div>
-		</div>
 	</div>
+	<script>
+			$(function(){
+				$('#login').on("click",LoginClickHandler);
+				$('.book_name').on("click",DetailClickHandler);
+			});
+			function LoginClickHandler(){
+				console.log("LoginClickHandler");
+				location.href = "<%=request.getContextPath()%>/login";
+			}
+			function DetailClickHandler(){
+				console.log("LoginClickHandler");
+				var isbn = $(this).prev().text();
+				location.href = "<%=request.getContextPath()%>/detail?isbn="+isbn;
+			}
+	</script>
 </body>
 </html>

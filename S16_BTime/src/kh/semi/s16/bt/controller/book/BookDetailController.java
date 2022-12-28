@@ -28,9 +28,12 @@ public class BookDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("detail controller!!");
 		BookService service = new BookService();
 		String isbn = request.getParameter("isbn");
+		System.out.println(isbn);
 		BookVo vo = service.selectOne(isbn);
+		request.setAttribute("bookdetail", vo);
 		String viewPage = "/WEB-INF/view/detail.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}

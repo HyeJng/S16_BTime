@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,24 +11,27 @@
 	<div>
 	<h3>도서 상세 페이지</h3>
 	<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
-		<img alt="" src="">
+		<img src="${bookdetail.thum_img }" alt="${bookdetail.book_name }" >
 		<div>
-			<p id="book_name"></p>
-			<p id="isbn"></p>
-			<p id="author"></p>
-			<p id="publisher"></p>
-			<p id="category"></p>
+			<p id="book_name">${bookdetail.book_name }</p>
+			<p id="isbn">${bookdetail.isbn }</p>
+			<p id="author">${bookdetail.author }</p>
+			<p id="publisher">${bookdetail.publisher }</p>
+			<p id="category">${bookdetail.category }</p>
+			<br>
+			<hr>
+			<div>
+				<p id="book_intro">${bookdetail.book_intro }</p>
+			</div>
 			<br>
 			<div>
-				<p id="total_grade"></p>
+				<p id="total_grade">${bookdetail.total_grade }</p>
 				<p id="grade_peo"></p>
 			</div>
 		</div>
 		<br>
 		<div>
-			<p id="book_intro"></p>
-			<p id="pub_intro"></p>
-			<p id="auth_intro"></p>
+			<p id="book_intro">${book.detail.book_intro }</p>
 		</div>
 		<div>
 			<button type="button">찜</button>
