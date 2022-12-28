@@ -37,6 +37,24 @@
 			<button type="button">찜</button>
 			<button type="button">도서 읽기</button> <!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
 		</div>
+		<br>
+		<div>
+			<div>
+				<input type="text" name="review_add" value="추천합니다!">
+				<button type="submit" id="btn_review_add">리뷰 작성</button>
+			</div>
+			<div>
+				<div>리뷰목록</div>
+				<div>
+					<c:forEach items="${reviewlist }" var="review">
+						<p class="id">${review.id }</p>
+						<p class="each_grade">${review.each_grade }</p>
+						<p class="rev_txt">${review.rev_txt }</p>
+						<p class="rev_date">${review.rev_date }</p>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

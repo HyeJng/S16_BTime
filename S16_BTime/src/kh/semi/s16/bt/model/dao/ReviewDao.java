@@ -71,13 +71,14 @@ public class ReviewDao {
 		}
 		return result;
 	}
-	public List<ReviewVo> selectList(Connection conn){
+	public List<ReviewVo> selectList(Connection conn, String isbn){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ReviewVo> volist = null;
-		String query = "SELECT * FROM REVIEW";
+		String query = "SELECT * FROM REVIEW WHERE ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, isbn);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				volist = new ArrayList<ReviewVo>();

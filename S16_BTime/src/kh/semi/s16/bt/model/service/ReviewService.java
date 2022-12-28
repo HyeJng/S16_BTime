@@ -38,10 +38,10 @@ public class ReviewService {
 		close(conn);
 		return result;
 	}
-	public List<ReviewVo> selectList(){
+	public List<ReviewVo> selectList(String isbn){
 		List<ReviewVo> volist = null;
 		Connection conn = getConnection();
-		volist = dao.selectList(conn);
+		volist = dao.selectList(conn, isbn);
 		close(conn);
 		return volist;
 	}
