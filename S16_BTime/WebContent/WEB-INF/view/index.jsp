@@ -39,10 +39,8 @@
 							<img src="${book.thum_img }" alt="${book.book_name }">
 						</div>
 						<div class="book_isbn">${book.isbn }</div>
-						<div class="book_name">${book.book_name }</div>
+						<button type="button" class="book_name">${book.book_name }</button>
 						<div class="book_author">${book.author }</div>
-						<div class="book_publisher">${book.publisher }</div>
-						<div class="book_intro">${book.book_intro }</div>
 					</div>
 				</li>
 			</c:forEach>
