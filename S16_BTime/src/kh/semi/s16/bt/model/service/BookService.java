@@ -37,6 +37,7 @@ public class BookService {
 	public int update(BookVo b) {
 		int result = 0;
 		Connection conn = getConnection();
+		setAutoCommit(conn, false);
 		result = dao.update(conn, b);
 		if(result > 0) commit(conn);
 		else rollback(conn);

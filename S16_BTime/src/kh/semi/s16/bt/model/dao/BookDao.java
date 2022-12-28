@@ -80,22 +80,13 @@ public class BookDao {
 	public int update(Connection conn, BookVo b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "UPDATE BOOK SET"
-				+ "thum_img=?,book_name=?,author=?,publisher=?,category=?,book_intro=?,auth_intro=?,pub_intro=?,book_page=?,total_grade=?,grade_peo=? WHERE ISBN=?";
+		String query = "UPDATE BOOK SET "
+				+ "book_page=?,grade_peo=? WHERE ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, b.getThum_img());
-			pstmt.setString(2, b.getBook_name());
-			pstmt.setString(3, b.getAuthor());
-			pstmt.setString(4, b.getPublisher());
-			pstmt.setString(5, b.getCategory());
-			pstmt.setString(6, b.getBook_intro());
-			pstmt.setString(7, b.getAuth_intro());
-			pstmt.setString(8, b.getPub_intro());
-			pstmt.setInt(9, b.getBook_page());
-			pstmt.setDouble(10, b.getTotal_grade());
-			pstmt.setInt(11, b.getGrade_peo());
-			pstmt.setString(12, b.getIsbn());
+			pstmt.setInt(1, b.getBook_page());
+			pstmt.setInt(2, b.getGrade_peo());
+			pstmt.setString(3, b.getIsbn());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -27,16 +27,16 @@ import kh.semi.s16.bt.model.service.BookService;
 import kh.semi.s16.bt.model.vo.BookVo;
 
 /**
- * Servlet implementation class BookInsertController
+ * Servlet implementation class BookUpdateFromAladinAPIController
  */
-@WebServlet("/bookinsertFromAladin")
-public class BookInsertFromAladinAPIController extends HttpServlet {
+@WebServlet("/BookUpdateFromAladinAPI")
+public class BookUpdateFromAladinAPIController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BookInsertFromAladinAPIController() {
+	public BookUpdateFromAladinAPIController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,7 +48,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		out.println("aladin loading");
+		out.println("aladin loading~~update~~");
 		getAladinApi();
 
 		out.println("aladin finish");
@@ -77,38 +77,17 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 //    			callback : "abc"
 //    		}
 
-			// 베스트셀러 목록
-//    		method : "get",
-//    		dataType : "jsonp",
-//    		url : "http://www.aladin.co.kr/ttb/api/ItemList.aspx",
-//    		data : {
-//    			//TTBKey : "ttbcmqlfkd_1542001",
-//    			//TTBKey : "ttbto66931826001",
-//    			TTBKey : "ttbhagalaz04301822001",
-//    			QueryType : "Bestseller",
-//    			SearchTarget:"Book",
-//    			output : "JS",
-//    			start : "1",
-//    			cover: "big",
-//    			Version: "20131101",
-//    			callback : "abc"
-//    		}
-			// 1.url생성
-
-			StringBuilder urlBuilder = new StringBuilder("http://www.aladin.co.kr/ttb/api/ItemList.aspx"); /* URL */
+			StringBuilder urlBuilder = new StringBuilder("http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx"); /* URL */
 			urlBuilder.append(
 					"?" + URLEncoder.encode("TTBKey", "UTF-8") + "=" + "ttbhagalaz04301822001"); /* Service Key */
-			urlBuilder.append("&" + URLEncoder.encode("QueryType", "UTF-8") + "="
-					+ URLEncoder.encode("BlogBest", "UTF-8")); /* 페이지번호 */
-			urlBuilder.append("&" + URLEncoder.encode("Cover", "UTF-8") + "=" + URLEncoder.encode("Big", "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("ItemIdType", "UTF-8") + "=" + URLEncoder.encode("ISBN13", "UTF-8"));
 			urlBuilder.append(
-					"&" + URLEncoder.encode("SearchTarget", "UTF-8") + "=" + URLEncoder.encode("Book", "UTF-8"));
-			urlBuilder.append("&" + URLEncoder.encode("MaxResults", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8"));
+					"&" + URLEncoder.encode("ItemId", "UTF-8") + "=" + URLEncoder.encode("9791190090780", "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("Output", "UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); // xml
 																														// 형태
-			urlBuilder.append("&" + URLEncoder.encode("start", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8"));
-			urlBuilder
-					.append("&" + URLEncoder.encode("Version", "UTF-8") + "=" + URLEncoder.encode("20131101", "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("Version", "UTF-8") + "=" + URLEncoder.encode("20131101", "UTF-8"));
+			urlBuilder.append(
+					"&" + URLEncoder.encode("OptResult", "UTF-8") + "=" + URLEncoder.encode("ratingInfo", "UTF-8"));
 
 			// 2.url로 연결
 			URL url = new URL(urlBuilder.toString());
@@ -116,17 +95,6 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-type", "application/json");
 			System.out.println("Response code: " + conn.getResponseCode());
-
-			// 3.연결 Stream으로 부터 읽기
-			// 방법 1 - stream 으로 부터 읽은 것을 console 출력
-			/*
-			 * BufferedReader rd; if(conn.getResponseCode() >= 200 && conn.getResponseCode()
-			 * <= 300) { rd = new BufferedReader(new
-			 * InputStreamReader(conn.getInputStream())); } else { rd = new
-			 * BufferedReader(new InputStreamReader(conn.getErrorStream())); } StringBuilder
-			 * sb = new StringBuilder(); String line; while ((line = rd.readLine()) != null)
-			 * { sb.append(line); } System.out.println(sb.toString()); rd.close();
-			 */
 
 			// 방법 2 - stream 으로 부터 읽은 것을 class 넣기
 			// conn --> inputstream --> Document --> xml 다룰수 있음
@@ -144,66 +112,57 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 				Node n = item.getFirstChild(); // deathCnt
 
 				BookVo vo = new BookVo();
-				while (n != null) {
-					String nodeName = n.getNodeName();
-					String nodeText = n.getTextContent();
-					try {
-						switch (nodeName) {
-						case "isbn13": // case "itemId":
-							vo.setIsbn(nodeText);
-							break;
-						case "cover":
-							vo.setThum_img(nodeText);
-							break;
-						case "title":
-							vo.setBook_name(nodeText);
-							break;
-						case "author":
-							vo.setAuthor(nodeText);
-							break;
-						case "publisher":
-							vo.setPublisher(nodeText);
-							break;
-						case "categoryName":
-							vo.setCategory(nodeText);
-							break;
-						case "description":
-							vo.setBook_intro(nodeText);
-							break;
-						case "a":
-							vo.setAuth_intro(nodeText);
-							break;
-						case "b":
-							vo.setPub_intro(nodeText);
-							break;
-						case "itemPage":
-							vo.setBook_page(Integer.parseInt(nodeText));
-							break;
-						case "customerReviewRank":
-							vo.setTotal_grade(Double.parseDouble(nodeText));
-							break;
-						case "ratingCount":
-							vo.setGrade_peo(Integer.parseInt(nodeText));
-							break;
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
+				String nodeName = item.getNodeName();
+				String nodeText = item.getTextContent();
+				try {
+					switch (nodeName) {
+					case "isbn13": // case "itemId":
+						vo.setIsbn(nodeText);
+						break;
+					case "cover":
+						vo.setThum_img(nodeText);
+						break;
+					case "title":
+						vo.setBook_name(nodeText);
+						break;
+					case "author":
+						vo.setAuthor(nodeText);
+						break;
+					case "publisher":
+						vo.setPublisher(nodeText);
+						break;
+					case "categoryName":
+						vo.setCategory(nodeText);
+						break;
+					case "description":
+						vo.setBook_intro(nodeText);
+						break;
+					case "a":
+						vo.setAuth_intro(nodeText);
+						break;
+					case "b":
+						vo.setPub_intro(nodeText);
+						break;
+					case "itemPage":
+						vo.setBook_page(Integer.parseInt(nodeText));
+						break;
+					case "customerReviewRank":
+						vo.setTotal_grade(Double.parseDouble(nodeText));
+						break;
+					case "ratingCount":
+						vo.setGrade_peo(Integer.parseInt(nodeText));
+						break;
 					}
-					n = n.getNextSibling();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
-				volist.add(vo);
-			}
-
-			for (BookVo vo : volist) {
 				System.out.println(vo);
+				conn.disconnect();
+
+				BookService service = new BookService();
+				service.update(vo);
 			}
-
-			conn.disconnect();
-
-			BookService service = new BookService();
-			service.insert(volist);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -17,11 +17,11 @@
 		<div>
 		<c:choose>
 			<c:when test="${empty loginInfo }">
-				<button type="button" id="logout">로그아웃</button>
-				<button type="button" id="mypage">마이페이지</button>
+				<button type="button" id="login">로그인</button>
 			</c:when>
 			<c:otherwise>
-				<button type="button" id="login">로그인</button>
+				<button type="button" id="logout">로그아웃</button>
+				<button type="button" id="mypage">마이페이지</button>
 			</c:otherwise>
 		</c:choose>
 		</div>
