@@ -80,8 +80,10 @@
 				location.href = "<%=request.getContextPath()%>/logout";
 			}
 			function DetailClickHandler(){
-				console.log("LoginClickHandler");
+				console.log("DetailClickHandler");
+				var id = '<%=(String)session.getAttribute("id")%>';
 				var isbn = $(this).prev().text();
+				
 				location.href = "<%=request.getContextPath()%>/detail?isbn="+isbn;
 			}
 	</script>

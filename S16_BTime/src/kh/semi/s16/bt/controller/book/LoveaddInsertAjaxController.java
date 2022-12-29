@@ -33,7 +33,14 @@ public class LoveaddInsertAjaxController extends HttpServlet {
 		LoveAddService service = new LoveAddService();
 		String id = request.getParameter("id");
 		String isbn = request.getParameter("isbn");
-		int result = service.insert(id, isbn);
+		String add = request.getParameter("add");
+		
+		int result = 0;
+		if(add.equals("no")) {
+			result = service.insert(id, isbn);
+		}else {
+			result = service.delete(id, isbn);
+		}
 		System.out.println(result);
 	}
 

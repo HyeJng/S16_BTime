@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import kh.semi.s16.bt.model.vo.BookVo;
 import kh.semi.s16.bt.model.vo.LoveAddVo;
 
 public class LoveAddDao {
@@ -81,15 +82,19 @@ public class LoveAddDao {
 	}
 	public LoveAddVo selectOne(Connection conn, String id, String isbn) {
 		LoveAddVo vo = null;
-		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK B ON L.ISBN=B.ISBN WHERE ID=? AND ISBN=?";
+		String query = "SELECT * FROM LOVE_ADD WHERE ID=? AND ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, isbn);
 			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new LoveAddVo();
+				vo.setId(rs.getString("id"));
+				vo.setIsbn(rs.getString("isbn"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

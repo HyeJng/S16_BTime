@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,9 +10,9 @@
 </head>
 <body>
 	<div>
-	<h3>도서 상세 페이지</h3>
-	<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
-		<img src="${bookdetail.thum_img }" alt="${bookdetail.book_name }" >
+		<h3>도서 상세 페이지</h3>
+		<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
+		<img src="${bookdetail.thum_img }" alt="${bookdetail.book_name }">
 		<div>
 			<p id="book_name">${bookdetail.book_name }</p>
 			<p id="isbn">${bookdetail.isbn }</p>
@@ -35,8 +35,16 @@
 			<p id="book_intro">${book.detail.book_intro }</p>
 		</div>
 		<div>
-			<button type="button" id="loveadd">찜</button>
-			<button type="button">도서 읽기</button> <!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
+			<c:choose>
+				<c:when test="${empty addChk }">
+					<button type="button" id="loveadd" class="add">찜</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="loveadd">찜 해제</button>
+				</c:otherwise>
+			</c:choose>
+			<button type="button">도서 읽기</button>
+			<!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
 		</div>
 		<br>
 		<div>
@@ -65,26 +73,44 @@
 		function loveAddClickHandler(){
 			var id = '<%=(String)session.getAttribute("id")%>';
 			var isbn = $("#isbn").text();
-			
-			$.ajax({
-				type:"post"
-					, url:"loveadd.ajax"
-					, data:{id:id, isbn:isbn}
-					, success:btnSendSuccessCb
-					, error:ajaxErrorCb
-			});
+
+			if ($("#loveadd").hasClass("add")) {
+				var add = "no";
+				$.ajax({
+					type : "post",
+					url : "loveadd.ajax",
+					data : {
+						id : id,
+						isbn : isbn,
+						add : add
+					},
+					success : btnSendSuccessCb,
+					error : ajaxErrorCb
+				});
+			} else {
+				var add = "yes";
+				$.ajax({
+					type : "post",
+					url : "loveadd.ajax",
+					data : {
+						id : id,
+						isbn : isbn,
+						add : add
+					},
+					success : btnSendSuccessCb,
+					error : ajaxErrorCb
+				});
+			}
 		}
-		
-		
-		function btnSendSuccessCb( loveAdd ){
+
+		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);
 			console.log(loveAdd.result);
 			console.log(loveAdd["result"]);
 		}
-		function ajaxErrorCb(request, status, error){
-			alert("code:"+request.status+"\n"
-					+"message"+request.responseText+"\n"
-					+"error"+error);
+		function ajaxErrorCb(request, status, error) {
+			alert("code:" + request.status + "\n" + "message"
+					+ request.responseText + "\n" + "error" + error);
 		}
 	</script>
 </body>
