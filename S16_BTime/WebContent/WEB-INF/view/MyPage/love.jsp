@@ -5,15 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>찜</title>
+<script src='./js/jquery-3.6.1.js'></script>
 </head>
 <body>
 	<div>
 	<h3>찜 목록</h3>
 	<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
 	<div>
-		<button type="button">찜</button>
-		<button type="button">읽고 있는 책</button>
-		<button type="button">구독 정보</button>
+		<button type="button" id="loveaddList">찜</button>
+		<button type="button" id="readingList">읽고 있는 책</button>
+		<button type="button" id="subInfo">구독 정보</button>
 	</div>
 		<img alt="" src="">
 		<div>
@@ -26,5 +27,25 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(loadHandler);
+		function loadHandler(){
+			$('#loveaddList').on("click",loveaddListClickHandler);
+			$('#readingList').on("click",readingListClickHandler);
+			$('#subInfo').on("click",subInfoClickHandler);
+		}
+		function loveaddListClickHandler(){
+			console.log("loveaddListClickHandler");
+			location.href = "<%=request.getContextPath()%>/loveadd";
+		}
+		function readingListClickHandler(){
+			console.log("readingListClickHandler");
+			location.href = "<%=request.getContextPath()%>/readingnow";
+		}
+		function subInfoClickHandler(){
+			console.log("subInfoClickHandler");
+			location.href = "<%=request.getContextPath()%>/subscribeinfo";
+		}
+	</script>
 </body>
 </html>

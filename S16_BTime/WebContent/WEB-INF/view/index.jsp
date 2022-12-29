@@ -70,6 +70,7 @@
 				$('#login').on("click",LoginClickHandler);
 				$('#logout').on("click",LogoutClickHandler);
 				$('.book_name').on("click",DetailClickHandler);
+				$('#mypage').on("click",MyPageClickHandler);
 			});
 			function LoginClickHandler(){
 				console.log("LoginClickHandler");
@@ -83,8 +84,11 @@
 				console.log("DetailClickHandler");
 				var id = '<%=(String)session.getAttribute("id")%>';
 				var isbn = $(this).prev().text();
-				
 				location.href = "<%=request.getContextPath()%>/detail?isbn="+isbn;
+			}
+			function MyPageClickHandler(){
+				console.log("MyPageClickHandler");
+				location.href = "<%=request.getContextPath()%>/loveadd";
 			}
 	</script>
 </body>

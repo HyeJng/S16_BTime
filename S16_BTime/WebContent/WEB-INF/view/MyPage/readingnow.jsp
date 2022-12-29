@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>읽고 있는 책</title>
+<script src='./js/jquery-3.6.1.js'></script>
 </head>
 <body>
 	<div>
@@ -28,5 +29,25 @@
 			<p id="readstr_date"></p>
 		</div>
 	</div>
+	<script>
+		$(loadHandler);
+		function loadHandler(){
+			$('#loveaddList').on("click",loveaddListClickHandler);
+			$('#readingList').on("click",readingListClickHandler);
+			$('#subInfo').on("click",subInfoClickHandler);
+		}
+		function loveaddListClickHandler(){
+			console.log("loveaddListClickHandler");
+			location.href = "<%=request.getContextPath()%>/loveadd";
+		}
+		function readingListClickHandler(){
+			console.log("readingListClickHandler");
+			location.href = "<%=request.getContextPath()%>/readingnow";
+		}
+		function subInfoClickHandler(){
+			console.log("subInfoClickHandler");
+			location.href = "<%=request.getContextPath()%>/subscribeinfo";
+		}
+	</script>
 </body>
 </html>
