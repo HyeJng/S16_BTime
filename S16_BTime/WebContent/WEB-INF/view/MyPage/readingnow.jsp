@@ -10,6 +10,11 @@
 	<div>
 	<h3>읽고 있는 책 목록</h3>
 	<p>도서 DB 제공 : 알라딘 인터넷서점( www.aladin.co.kr)</p>
+		<div>
+		<button type="button">찜</button>
+		<button type="button">읽고 있는 책</button>
+		<button type="button">구독 정보</button>
+	</div>
 		<img alt="" src="">
 		<div>
 			<p id="book_name"></p>

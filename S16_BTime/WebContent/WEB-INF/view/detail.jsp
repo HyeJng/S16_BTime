@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상세 도서</title>
+<script src='./js/jquery-3.6.1.js'></script>
 </head>
 <body>
 	<div>
@@ -34,7 +35,7 @@
 			<p id="book_intro">${book.detail.book_intro }</p>
 		</div>
 		<div>
-			<button type="button">찜</button>
+			<button type="button" id="loveadd">찜</button>
 			<button type="button">도서 읽기</button> <!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
 		</div>
 		<br>
@@ -56,5 +57,14 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(loadedHandler);
+		function loadedHandler(){
+			$("#loveadd").on("click", loveAddClickHandler);
+		}
+		function loveAddClickHandler(){
+			
+		}
+	</script>
 </body>
 </html>
