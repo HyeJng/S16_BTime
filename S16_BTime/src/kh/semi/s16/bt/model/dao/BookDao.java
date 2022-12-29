@@ -53,7 +53,7 @@ public class BookDao {
 	public int insert(Connection conn, BookVo b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO bOOK VALUES(?,?,?,?,?  ,?,TO_CLOB(?),?,TO_CLOB(?),?,   ?,?)";
+		String query = "INSERT INTO BOOK VALUES(?,?,?,?,?  ,?,TO_CLOB(?),?,TO_CLOB(?),?,   ?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getIsbn());

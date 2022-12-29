@@ -63,7 +63,28 @@
 			$("#loveadd").on("click", loveAddClickHandler);
 		}
 		function loveAddClickHandler(){
+			var id = '<%=(String)session.getAttribute("id")%>';
+			var isbn = $("#isbn").text();
 			
+			$.ajax({
+				type:"post"
+					, url:"loveadd.ajax"
+					, data:{id:id, isbn:isbn}
+					, success:btnSendSuccessCb
+					, error:ajaxErrorCb
+			});
+		}
+		
+		
+		function btnSendSuccessCb( loveAdd ){
+			console.log(loveAdd);
+			console.log(loveAdd.result);
+			console.log(loveAdd["result"]);
+		}
+		function ajaxErrorCb(request, status, error){
+			alert("code:"+request.status+"\n"
+					+"message"+request.responseText+"\n"
+					+"error"+error);
 		}
 	</script>
 </body>
