@@ -118,6 +118,7 @@
 				,success : btnSendSuccessCb
 				,error : ajaxErrorCb
 			});
+			$(this).prev().val("추천합니다!");
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);
