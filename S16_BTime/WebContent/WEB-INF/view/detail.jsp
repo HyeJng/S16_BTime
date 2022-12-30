@@ -43,8 +43,8 @@
 					<button type="button" id="loveadd">찜 해제</button>
 				</c:otherwise>
 			</c:choose>
-			<button type="button">도서 읽기</button>
-			<!-- 여기서는 버튼을 누르면 마이페이지에 추가만 되도록 구현 -->
+			<button type="button" id="btn_reading">도서 읽기</button>
+			<!-- 여기서는 버튼을 누르면 마이페이지에 추가+새창 띄우기만 되도록 구현 -->
 		</div>
 		<br>
 		<div>
@@ -70,6 +70,7 @@
 		function loadedHandler(){
 			$("#loveadd").on("click", loveAddClickHandler);
 			$("#btn_review_add").on("click", reviewAddClickHandler);
+			$("#btn_reading").on("click", readingClickHandler);
 		}
 		function loveAddClickHandler(){
 			var id = '<%=(String)session.getAttribute("id")%>';
@@ -124,6 +125,19 @@
 			});
 			$(this).prev().val("추천합니다!");
 			document.location.reload();
+		}
+		function readingClickHandler(){
+			var isbn = $("#isbn").text();
+			$.ajax({
+				type : "post"
+				, url : "readingnow.ajax"
+				, data : {
+					isbn : isbn
+				}
+				,success : btnSendSuccessCb
+				,error : ajaxErrorCb
+			});
+			location.href = "<%=request.getContextPath()%>/reading";
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);

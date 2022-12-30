@@ -17,13 +17,11 @@ public class ReadingNowDao {
 	public int insert(Connection conn, ReadingNowVo rn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO READING_NOW VALUES (?,?,?,?)";
+		String query = "INSERT INTO READING_NOW VALUES (0,SYSDATE,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, rn.getRead_page());
-			pstmt.setDate(2, rn.getReadstr_date());
-			pstmt.setString(3, rn.getId());
-			pstmt.setString(4, rn.getIsbn());
+			pstmt.setString(1, rn.getId());
+			pstmt.setString(2, rn.getIsbn());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -36,13 +34,12 @@ public class ReadingNowDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "UPDATE READING_NOW SET"+
-				"READ_PAGE=?,READSTR_DATE=?,ID=?,ISBN=?";
+				"READ_PAGE=?,READSTR_DATE=SYSDATE,ID=?,ISBN=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, rn.getRead_page());
-			pstmt.setDate(2, rn.getReadstr_date());
-			pstmt.setString(3, rn.getId());
-			pstmt.setString(4, rn.getIsbn());
+			pstmt.setString(2, rn.getId());
+			pstmt.setString(3, rn.getIsbn());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

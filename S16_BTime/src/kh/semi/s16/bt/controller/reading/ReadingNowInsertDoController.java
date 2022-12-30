@@ -17,7 +17,7 @@ import kh.semi.s16.bt.model.vo.ReadingNowVo;
 /**
  * Servlet implementation class ReadingNowInsertDoController
  */
-@WebServlet("/readingnow.do")
+@WebServlet("/reading.do")
 public class ReadingNowInsertDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,32 +36,22 @@ public class ReadingNowInsertDoController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
-		System.out.println("readingnow insert do controller");
+		System.out.println("reading insert do controller");
 		
 		ReadingNowService service = new ReadingNowService();
 		ReadingNowVo rn = new ReadingNowVo();
 		
+		String id = (String) request.getSession().getAttribute("id");
+		String isbn = request.getParameter("isbn");
 		int read_page = Integer.parseInt(request.getParameter("read_page"));
-		Date readstr_date = null;
 		
-		String fmReadstr_date = request.getParameter("readstr_date");
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		try {
-			readstr_date = (Date) fm.parse(fmReadstr_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
+		rn.setId(id);
+		rn.setIsbn(isbn);
 		rn.setRead_page(read_page);
-		rn.setReadstr_date(readstr_date);
 		
 		int result = service.insert(rn);
-		if(result > 0) {
-			String viewPage = "/WEB-INF/view/MyPage/readingnow.jsp";
-			response.sendRedirect(viewPage);
-		}else {
-			//TODO
-		}
+		
+		
 	}
 
 }
