@@ -37,6 +37,12 @@ public class ReadingNowInsertAjaxController extends HttpServlet {
 		String id = (String) request.getSession().getAttribute("id");
 		String isbn = request.getParameter("isbn");
 
+		ReadingNowVo chk = service.selectOne(id, isbn);
+		if(chk != null) {
+			System.out.println("이미 저장된 도서!!");
+			return;
+		}
+		
 		rn.setId(id);
 		rn.setIsbn(isbn);
 
