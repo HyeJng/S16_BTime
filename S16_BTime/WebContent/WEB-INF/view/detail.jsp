@@ -69,6 +69,7 @@
 		$(loadedHandler);
 		function loadedHandler(){
 			$("#loveadd").on("click", loveAddClickHandler);
+			$("#btn_review_add").on("click", reviewAddClickHandler);
 		}
 		function loveAddClickHandler(){
 			var id = '<%=(String)session.getAttribute("id")%>';
@@ -102,7 +103,22 @@
 				});
 			}
 		}
-
+		function reviewAddClickHandler(){
+			var isbn = $("#isbn").text();
+			var rev_txt = $(this).prev().val();
+			var each_grade = 0; //TODO
+			$.ajax({
+				type : "post"
+				, url : "ReviewInsert.ajax"
+				, data : {
+					isbn : isbn
+					,rev_txt : rev_txt
+					,each_grade : each_grade
+				}
+				,success : btnSendSuccessCb
+				,error : ajaxErrorCb
+			});
+		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);
 			console.log(loveAdd.result);

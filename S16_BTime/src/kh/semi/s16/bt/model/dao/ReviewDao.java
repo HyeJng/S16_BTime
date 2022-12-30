@@ -17,15 +17,13 @@ public class ReviewDao {
 	public int insert(Connection conn, ReviewVo review) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO REVIEW VALUES(?,?,?,?,?,?,?)";
+		String query = "INSERT INTO REVIEW VALUES(1,?,?,SYSDATE,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, review.getRev_num());
-			pstmt.setString(2, review.getIsbn());
-			pstmt.setString(3, review.getRev_txt());
-			pstmt.setDate(4, review.getRev_date());
-			pstmt.setInt(5, review.getEach_grade());
-			pstmt.setString(6, review.getId());
+			pstmt.setString(1, review.getIsbn());
+			pstmt.setString(2, review.getRev_txt());
+			pstmt.setInt(3, review.getEach_grade());
+			pstmt.setString(4, review.getId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

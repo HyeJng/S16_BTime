@@ -34,39 +34,38 @@ public class ReviewInsertAjaxController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("review insert ajax controller");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
+		System.out.println("review encoding");
 		 
 		ReviewService service = new ReviewService();
 		ReviewVo review = new ReviewVo();
 		
-		//int rev_num -> 자동으로 쌓이는거 아닌가? 그럼 ddl.dml에서 rnum같은거로 설정해줘야 하는거 아님????//TODO
 		String isbn = request.getParameter("isbn");
 		String rev_txt = request.getParameter("rev_txt");
-		Date rev_date = null;
+		//Date rev_date = null;
 		int each_grade = Integer.parseInt(request.getParameter("each_grade"));
-		String id = request.getParameter("id");
+		String id = (String) request.getSession().getAttribute("id");
 		
-		String fmRev_date = request.getParameter("rev_date");
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		try {
-			rev_date = (Date)fm.parse(fmRev_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		String fmRev_date = request.getParameter("rev_date");
+//		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+//		try {
+//			rev_date = (Date)fm.parse(fmRev_date);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 		
 		review.setIsbn(isbn);
 		review.setRev_txt(rev_txt);
-		review.setRev_date(rev_date);
+		//review.setRev_date(rev_date);
 		review.setEach_grade(each_grade);
 		review.setId(id);
 		
 		int result = service.insert(review);
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath()+"/detail");
-		}else {
-			//TODO
-		}
+		
+		System.out.println(result);
+		System.out.println(review);
 	}
 
 }
