@@ -137,7 +137,7 @@
 				,success : btnSendSuccessCb
 				,error : ajaxErrorCb
 			});
-			location.href = "<%=request.getContextPath()%>/reading";
+			window.open("<%=request.getContextPath()%>/reading", "width=800, height=700, resizable=yes" );
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);
