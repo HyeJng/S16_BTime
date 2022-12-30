@@ -123,6 +123,7 @@
 				,error : ajaxErrorCb
 			});
 			$(this).prev().val("추천합니다!");
+			document.location.reload();
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);

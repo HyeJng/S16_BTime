@@ -65,7 +65,6 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		
 		int result = service.insert(review);
 		
-		
 		System.out.println(result);
 		System.out.println(review);
 	}
