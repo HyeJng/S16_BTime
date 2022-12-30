@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>책 제목</title>
+<title>${bookRead.book_name }</title>
 </head>
 <body>
-	<div>내용</div>
+	<div>
+		<div>
+			${bookRead.book_name }
+		</div>
+		<div>
+			${bookRead.book_intro }
+		</div>
+	</div>
 </body>
 </html>

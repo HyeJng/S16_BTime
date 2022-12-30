@@ -34,13 +34,15 @@ public class ReadingNowBookOpenController extends HttpServlet {
 		
 		String id = (String) request.getSession().getAttribute("id");
 		String isbn = request.getParameter("isbn");
-		
+		System.out.println("sssss"+isbn);
 		ReadingNowService rservice = new ReadingNowService();
 		ReadingNowVo rn = rservice.selectOne(id, isbn);
+		System.out.println(rn);
 		request.setAttribute("readingInfo", rn);
 		
 		BookService bservice = new BookService();
 		BookVo b = bservice.selectOne(isbn);
+		System.out.println(b);
 		request.setAttribute("bookRead", b);
 		
 		String viewPath = "WEB-INF/view/reading.jsp";
