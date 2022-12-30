@@ -73,7 +73,7 @@ public class ReviewDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ReviewVo> volist = null;
-		String query = "SELECT * FROM REVIEW WHERE ISBN=?";
+		String query = "SELECT * FROM REVIEW WHERE ISBN=? ORDER BY REV_DATE DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, isbn);

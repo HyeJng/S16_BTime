@@ -88,6 +88,8 @@
 					success : btnSendSuccessCb,
 					error : ajaxErrorCb
 				});
+				$(this).text("찜 해제");
+				$(this).removeClass("add");
 			} else {
 				var add = "yes";
 				$.ajax({
@@ -101,6 +103,8 @@
 					success : btnSendSuccessCb,
 					error : ajaxErrorCb
 				});
+				$(this).text("찜");
+				$(this).addClass("add");
 			}
 		}
 		function reviewAddClickHandler(){
