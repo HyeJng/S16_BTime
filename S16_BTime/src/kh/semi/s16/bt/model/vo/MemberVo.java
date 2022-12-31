@@ -16,12 +16,13 @@ public class MemberVo {
 	private String name;
 	private String email;
 	private String issub;
+	private int subType;
 	private Date substr_date;
 	private Date subend_date;
 	public MemberVo() {
 		super();
 	}
-	public MemberVo(String id, String pwd, String name, String email, String issub, Date substr_date,
+	public MemberVo(String id, String pwd, String name, String email, String issub, int subType, Date substr_date,
 			Date subend_date) {
 		super();
 		this.id = id;
@@ -29,13 +30,14 @@ public class MemberVo {
 		this.name = name;
 		this.email = email;
 		this.issub = issub;
+		this.subType = subType;
 		this.substr_date = substr_date;
 		this.subend_date = subend_date;
 	}
 	@Override
 	public String toString() {
 		return "MemberVo [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", issub=" + issub
-				+ ", substr_date=" + substr_date + ", subend_date=" + subend_date + "]";
+				+ ", subType=" + subType + ", substr_date=" + substr_date + ", subend_date=" + subend_date + "]";
 	}
 	public String getId() {
 		return id;
@@ -66,6 +68,12 @@ public class MemberVo {
 	}
 	public void setIssub(String issub) {
 		this.issub = issub;
+	}
+	public int getSubType() {
+		return subType;
+	}
+	public void setSubType(int subType) {
+		this.subType = subType;
 	}
 	public Date getSubstr_date() {
 		return substr_date;

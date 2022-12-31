@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +9,34 @@
 <script src='./js/jquery-3.6.1.js'></script>
 </head>
 <body>
+	<h3>나의 구독 정보</h3>
 	<div>
 		<button type="button" id="loveaddList">찜</button>
 		<button type="button" id="readingList">읽고 있는 책</button>
 		<button type="button" id="subInfo">구독 정보</button>
 	</div>
 	<div>
-		<p>님의 구독제 정보</p>
+		<p><%=session.getAttribute("id") %> 님의 구독제 정보</p>
 	</div>
 	<div id="mu_sub_info">
-		<p id="subtype">구독제 종류</p>
+		<p id="subType">
+			구독제 종류: 
+			<c:choose>
+				<c:when test="${subinfo.subType eq 1 }">
+					베이직-30일
+				</c:when>
+				<c:when test="${subinfo.subType eq 2 }">
+					스탠다드-60일
+				</c:when>
+				<c:otherwise>
+					프리미엄-90일
+				</c:otherwise>
+			</c:choose>
+			
+		</p>
 		<p>구독 기간</p>
 		<!-- substr_date, subend_date -->
-		<p>~</p>
+		<p>${subinfo.substr_date }~${subinfo.subend_date }</p>
 	</div>
 	<script>
 		$(loadHandler);

@@ -112,4 +112,26 @@ public class SubscribeDao {
 		}
 		return vo;
 	}
+	public SubscribeVo selectInfo(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SubscribeVo vo = null;
+		String query = "SELECT * FROM SUBSCRIBE WHERE SUBTYPE=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new SubscribeVo();
+				vo.setSubterm(rs.getInt("SUBTERM"));
+				vo.setSubprice(rs.getInt("SUBPRICE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return vo;
+	}
 }

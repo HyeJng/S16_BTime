@@ -34,6 +34,7 @@ public class MemberDao {
 				m.setName(rs.getString("NAME"));
 				m.setEmail(rs.getString("EMAIL"));
 				m.setIssub(rs.getString("ISSUB"));
+				m.setSubType(rs.getInt("SUBTYPE"));
 				m.setSubstr_date(rs.getDate("SUBSTR_DATE"));
 				m.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
@@ -57,6 +58,7 @@ public class MemberDao {
 			pstmt.setString(2, m.getName());
 			pstmt.setString(3, m.getEmail());
 			pstmt.setString(4, m.getIssub());
+			pstmt.setInt(4, m.getSubType());
 			pstmt.setDate(5, m.getSubstr_date());
 			pstmt.setDate(6, m.getSubend_date());
 			pstmt.setString(7, m.getId());
@@ -102,6 +104,7 @@ public class MemberDao {
 					vo.setName(rs.getString("NAME"));
 					vo.setEmail(rs.getString("EMAIL"));
 					vo.setIssub(rs.getString("ISSUB"));
+					vo.setSubType(rs.getInt("SUBTYPE"));
 					vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
 					vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 					volist.add(vo);
@@ -117,21 +120,23 @@ public class MemberDao {
 		return volist;
 	}
 //	selectOne - 상세조회
-	public MemberVo selectOne(Connection conn, String mid){
+	public MemberVo selectOne(Connection conn, String id){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		MemberVo vo = null;
 		String query = "SELECT * FROM MEMBER WHERE ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "ID");
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				vo = new MemberVo();
+				vo.setId(id);
 				vo.setPwd(rs.getString("PWD"));
 				vo.setName(rs.getString("NAME"));
 				vo.setEmail(rs.getString("EMAIL"));
 				vo.setIssub(rs.getString("ISSUB"));
+				vo.setSubType(rs.getInt("SUBTYPE"));
 				vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
 				vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
@@ -161,6 +166,7 @@ public class MemberDao {
 				vo.setName(rs.getString("name"));
 				vo.setEmail(rs.getString("email"));
 				vo.setIssub(rs.getString("issub"));
+				vo.setSubType(rs.getInt("SUBTYPE"));
 				vo.setSubstr_date(rs.getDate("SUBSTR_DATE"));
 				vo.setSubend_date(rs.getDate("SUBEND_DATE"));
 			}
