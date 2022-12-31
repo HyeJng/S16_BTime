@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +17,22 @@
 		<button type="button" id="readingList">읽고 있는 책</button>
 		<button type="button" id="subInfo">구독 정보</button>
 	</div>
-		<img alt="" src="">
-		<div>
-			<p id="book_name"></p>
-			<p id="author"></p>
-			<br>
+	<ul>
+		<c:forEach items="${lovelist }" var="book">
+		<li>
+			<img src="${book.thum_img }" alt="${book.book_name }">
 			<div>
-				<p id="total_grade"></p>
-				<p id="grade_peo"></p>
+				<p id="book_name">${book.book_name }</p>
+				<p id="author">${book.author }</p>
+				<br>
+				<div>
+					<p id="total_grade">${book.total_grade }</p>
+					<p id="grade_peo"></p>
+				</div>
 			</div>
-		</div>
+		</li>
+		</c:forEach>
+	</ul>
 	</div>
 	<script>
 		$(loadHandler);
@@ -36,7 +43,7 @@
 		}
 		function loveaddListClickHandler(){
 			console.log("loveaddListClickHandler");
-			location.href = "<%=request.getContextPath()%>/loveadd";
+			location.href = "<%=request.getContextPath()%>/love";
 		}
 		function readingListClickHandler(){
 			console.log("readingListClickHandler");

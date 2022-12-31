@@ -31,7 +31,7 @@
 		}
 		function loveaddListClickHandler(){
 			console.log("loveaddListClickHandler");
-			location.href = "<%=request.getContextPath()%>/loveadd";
+			location.href = "<%=request.getContextPath()%>/love";
 		}
 		function readingListClickHandler(){
 			console.log("readingListClickHandler");

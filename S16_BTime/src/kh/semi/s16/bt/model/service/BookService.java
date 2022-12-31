@@ -60,6 +60,13 @@ public class BookService {
 		close(conn);
 		return volist;
 	}
+	public List<BookVo> selectListLove(String id){
+		List<BookVo> volist = null;
+		Connection conn = getConnection();
+		volist = dao.selectListLove(conn, id);
+		close(conn);
+		return volist;
+	}
 	
 	public List<BookVo> selectListBest(int max){
 		List<BookVo> volist = null;

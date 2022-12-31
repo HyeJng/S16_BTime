@@ -128,7 +128,6 @@
 		}
 		function readingClickHandler(){
 			var isbn = $("#isbn").text();
-			var w = window.open("about:blank", "_blank", "width=800, height=700, resizable=yes" );
 			$.ajax({
 				type : "post"
 				, url : "readingnow.ajax"
@@ -138,7 +137,8 @@
 				,success : btnSendSuccessCb
 				,error : ajaxErrorCb
 			});
-			w.location.href = "<%=request.getContextPath()%>/reading?isbn="+isbn;
+			var w = window.open("about:blank", "_blank", "width=800, height=700, resizable=yes" );
+			w. location.href = "<%=request.getContextPath()%>/reading?isbn="+isbn;
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);

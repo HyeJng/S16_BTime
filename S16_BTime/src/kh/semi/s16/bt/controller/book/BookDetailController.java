@@ -40,9 +40,8 @@ public class BookDetailController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
-		//String id = request.getParameter("id");
 		String isbn = request.getParameter("isbn");
-		System.out.println(id); //null
+		System.out.println(id);
 		System.out.println(isbn);
 		
 		BookService bservice = new BookService();

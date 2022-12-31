@@ -88,7 +88,7 @@
 			}
 			function MyPageClickHandler(){
 				console.log("MyPageClickHandler");
-				location.href = "<%=request.getContextPath()%>/loveadd";
+				location.href = "<%=request.getContextPath()%>/love";
 			}
 	</script>
 </body>

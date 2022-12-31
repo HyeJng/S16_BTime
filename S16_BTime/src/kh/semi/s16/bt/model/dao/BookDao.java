@@ -149,6 +149,46 @@ public class BookDao {
 		return volist;
 	}
 	
+	public List<BookVo> selectListLove(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BookVo> volist = null;
+		int cnt = 0;
+		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK B ON L.ISBN=B.ISBN WHERE L.ID=? ORDER BY BOOK_NAME";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				volist = new ArrayList<BookVo>();
+				do {
+					BookVo vo = new BookVo();
+					vo.setIsbn(rs.getString("isbn"));
+					vo.setThum_img(rs.getString("thum_img"));
+					vo.setBook_name(rs.getString("book_name"));
+					vo.setAuthor(rs.getString("author"));
+					vo.setPublisher(rs.getString("publisher"));
+					vo.setCategory(rs.getString("category"));
+					vo.setBook_intro(rs.getString("book_intro"));
+					vo.setAuth_intro(rs.getString("auth_intro"));
+					vo.setPub_intro(rs.getString("pub_intro"));
+					vo.setBook_page(rs.getInt("book_page"));
+					vo.setTotal_grade(rs.getDouble("total_grade"));
+					vo.setGrade_peo(rs.getInt("grade_peo"));
+					volist.add(vo);
+					cnt++;
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println("조회개수:"+cnt);
+		return volist;
+	}
+	
 	public List<BookVo> selectListBest(Connection conn, int max) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

@@ -67,7 +67,7 @@ public class LoveAddDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK K ON L.ISBN=B.ISBN WHERE L.ID=?";
+		String query = "SELECT * FROM LOVE_ADD L JOIN BOOK B ON L.ISBN=B.ISBN WHERE L.ID=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
