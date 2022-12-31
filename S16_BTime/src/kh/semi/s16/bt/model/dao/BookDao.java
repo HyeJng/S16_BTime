@@ -148,6 +148,39 @@ public class BookDao {
 		}
 		return volist;
 	}
+	public List<BookVo> selectListBook(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BookVo> volist = null;
+		String query = "SELECT B.ISBN, B.BOOK_NAME, B.THUM_IMG, B.AUTHOR, B.PUBLISHER, B.CATEGORY, B.TOTAL_GRADE"
+				+ " FROM (SELECT ISBN FROM READING_NOW R RIGHT OUTER JOIN MEMBER M ON R.ID=M.ID WHERE M.ID=?) RN JOIN BOOK B"
+				+ " ON RN.ISBN=B.ISBN";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				volist = new ArrayList<BookVo>();
+				do {
+					BookVo vo = new BookVo();
+					vo.setIsbn(rs.getString("isbn"));
+					vo.setThum_img(rs.getString("thum_img"));
+					vo.setBook_name(rs.getString("book_name"));
+					vo.setAuthor(rs.getString("author"));
+					vo.setPublisher(rs.getString("publisher"));
+					vo.setCategory(rs.getString("category"));
+					vo.setTotal_grade(rs.getDouble("total_grade"));
+					volist.add(vo);
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return volist;
+	}
 	
 	public List<BookVo> selectListLove(Connection conn, String id) {
 		PreparedStatement pstmt = null;

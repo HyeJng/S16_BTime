@@ -60,6 +60,13 @@ public class BookService {
 		close(conn);
 		return volist;
 	}
+	public List<BookVo> selectListBook(String id){
+		List<BookVo> volist = null;
+		Connection conn = getConnection();
+		volist = dao.selectListBook(conn, id);
+		close(conn);
+		return volist;
+	}
 	public List<BookVo> selectListLove(String id){
 		List<BookVo> volist = null;
 		Connection conn = getConnection();

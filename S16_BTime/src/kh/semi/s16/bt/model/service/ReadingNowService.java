@@ -46,6 +46,13 @@ public class ReadingNowService {
 		close(conn);
 		return volist;
 	}
+	public List<ReadingNowVo> selectListBook(String id){
+		List<ReadingNowVo> volist = null;
+		Connection conn = getConnection();
+		volist = dao.selectListBook(conn, id);
+		close(conn);
+		return volist;
+	}
 	public ReadingNowVo selectOne(String id, String isbn) {
 		ReadingNowVo vo = null;
 		Connection conn = getConnection();

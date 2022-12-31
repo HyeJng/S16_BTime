@@ -92,6 +92,36 @@ public class ReadingNowDao {
 		}
 		return volist;
 	}
+	public List<ReadingNowVo> selectListBook(Connection conn, String id){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ReadingNowVo> volist = null;
+		String query = "SELECT B.ISBN,RN.READ_PAGE, RN.READSTR_DATE"
+				+ " FROM (SELECT ISBN, READ_PAGE, READSTR_DATE FROM READING_NOW R RIGHT OUTER JOIN MEMBER M ON R.ID=M.ID WHERE M.ID=?) RN JOIN BOOK B"
+				+ " ON RN.ISBN=B.ISBN";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				volist = new ArrayList<ReadingNowVo>();
+				do {
+					ReadingNowVo vo = new ReadingNowVo();
+					vo.setRead_page(rs.getInt("READ_PAGE"));
+					vo.setReadstr_date(rs.getDate("READSTR_DATE"));
+					vo.setId(id);
+					vo.setIsbn(rs.getString("ISBN"));
+					volist.add(vo);
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return volist;
+	}
 	public ReadingNowVo selectOne(Connection conn, String id, String isbn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

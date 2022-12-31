@@ -9,9 +9,9 @@
 </head>
 <body>
 	<div>
-		<button type="button">찜</button>
-		<button type="button">읽고 있는 책</button>
-		<button type="button">구독 정보</button>
+		<button type="button" id="loveaddList">찜</button>
+		<button type="button" id="readingList">읽고 있는 책</button>
+		<button type="button" id="subInfo">구독 정보</button>
 	</div>
 	<div>
 		<p>님의 구독제 정보</p>
