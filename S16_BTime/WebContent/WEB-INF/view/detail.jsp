@@ -49,6 +49,15 @@
 		<br>
 		<div>
 			<div>
+				<div class="star_grade">
+					<label class="startRadio__box">
+						<input type="radio" name="grade" value="1">
+						<input type="radio" name="grade" value="2">
+						<input type="radio" name="grade" value="3">
+						<input type="radio" name="grade" value="4">
+						<input type="radio" name="grade" value="5">
+					</label>
+				</div>
 				<input type="text" name="review_add" value="추천합니다!">
 				<button type="submit" id="btn_review_add">리뷰 작성</button>
 			</div>
@@ -73,7 +82,7 @@
 			$("#btn_reading").on("click", readingClickHandler);
 		}
 		function loveAddClickHandler(){
-			var id = '<%=(String)session.getAttribute("id")%>';
+			var id = '<%=(String) session.getAttribute("id")%>';
 			var isbn = $("#isbn").text();
 
 			if ($("#loveadd").hasClass("add")) {
@@ -111,7 +120,7 @@
 		function reviewAddClickHandler(){
 			var isbn = $("#isbn").text();
 			var rev_txt = $(this).prev().val();
-			var each_grade = 0; //TODO
+			var each_grade = $("input[type=radio][name=grade]:checked").val();
 			$.ajax({
 				type : "post"
 				, url : "ReviewInsert.ajax"
@@ -138,7 +147,7 @@
 				,error : ajaxErrorCb
 			});
 			var w = window.open("about:blank", "_blank", "width=800, height=700, resizable=yes" );
-			w. location.href = "<%=request.getContextPath()%>/reading?isbn="+isbn;
+			w. location.href = "<%=request.getContextPath()%>/reading?isbn="+ isbn;
 		}
 		function btnSendSuccessCb(loveAdd) {
 			console.log(loveAdd);

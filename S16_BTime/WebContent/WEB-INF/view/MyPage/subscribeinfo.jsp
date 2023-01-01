@@ -22,6 +22,9 @@
 		<p id="subType">
 			구독제 종류: 
 			<c:choose>
+				<c:when test="${empty subinfo }">
+					<h4>현재 이용 중인 구독제가 없습니다!</h4>
+				</c:when>
 				<c:when test="${subinfo.subType eq 1 }">
 					베이직-30일
 				</c:when>
