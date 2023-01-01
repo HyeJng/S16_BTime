@@ -29,8 +29,6 @@ public class BookService {
 		int result = 0;
 		Connection conn = getConnection();
 		result = dao.insert(conn, b);
-		if(result > 0) commit(conn);
-		else rollback(conn);
 		close(conn);
 		return result;
 	}
@@ -39,8 +37,14 @@ public class BookService {
 		Connection conn = getConnection();
 		setAutoCommit(conn, false);
 		result = dao.update(conn, b);
-		if(result > 0) commit(conn);
-		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int updateGrade(BookVo b, String isbn, int grade) {
+		int result = 0;
+		Connection conn = getConnection();
+		setAutoCommit(conn, false);
+		result = dao.updateGrade(conn, b, isbn, grade);
 		close(conn);
 		return result;
 	}
@@ -48,8 +52,6 @@ public class BookService {
 		int result = 0;
 		Connection conn = getConnection();
 		result = dao.delete(conn, isbn);
-		if(result > 0) commit(conn);
-		else rollback(conn);
 		close(conn);
 		return result;
 	}

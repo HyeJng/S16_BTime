@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.s16.bt.model.service.BookService;
+import kh.semi.s16.bt.model.service.BookService;
 import kh.semi.s16.bt.model.service.ReviewService;
+import kh.semi.s16.bt.model.vo.BookVo;
 import kh.semi.s16.bt.model.vo.ReviewVo;
 
 /**
@@ -40,32 +43,27 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		System.out.println("review encoding");
 		 
-		ReviewService service = new ReviewService();
+		ReviewService rservice = new ReviewService();
 		ReviewVo review = new ReviewVo();
 		
 		String isbn = request.getParameter("isbn");
 		String rev_txt = request.getParameter("rev_txt");
-		//Date rev_date = null;
 		int each_grade = Integer.parseInt(request.getParameter("each_grade"));
 		String id = (String) request.getSession().getAttribute("id");
 		
-//		String fmRev_date = request.getParameter("rev_date");
-//		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-//		try {
-//			rev_date = (Date)fm.parse(fmRev_date);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-		
 		review.setIsbn(isbn);
 		review.setRev_txt(rev_txt);
-		//review.setRev_date(rev_date);
 		review.setEach_grade(each_grade);
 		review.setId(id);
 		
-		int result = service.insert(review);
+		int rresult = rservice.insert(review);
 		
-		System.out.println(result);
+		BookService bservice = new BookService();
+		BookVo b = bservice.selectOne(isbn);
+		int bresult = bservice.updateGrade(b, isbn, each_grade);
+		
+		System.out.println(rresult);
+		System.out.println(bresult);
 		System.out.println(review);
 	}
 

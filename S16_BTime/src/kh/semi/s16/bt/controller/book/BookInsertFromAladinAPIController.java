@@ -176,12 +176,6 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 						case "b":
 							vo.setPub_intro(nodeText);
 							break;
-						case "itemPage":
-							vo.setBook_page(Integer.parseInt(nodeText));
-							break;
-						case "customerReviewRank":
-							vo.setTotal_grade(Double.parseDouble(nodeText));
-							break;
 						case "ratingCount":
 							vo.setGrade_peo(Integer.parseInt(nodeText));
 							break;
@@ -191,7 +185,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 					}
 					n = n.getNextSibling();
 				}
-
+				
 				volist.add(vo);
 			}
 

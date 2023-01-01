@@ -22,7 +22,7 @@ public class BookVo {
 	private String book_intro;
 	private String auth_intro;
 	private String pub_intro;
-	private int book_page;
+	private int accum_grade;
 	private double total_grade;
 	private int grade_peo;
 	
@@ -32,7 +32,7 @@ public class BookVo {
 	}
 
 	public BookVo(String isbn, String thum_img, String book_name, String author, String publisher, String category,
-			String book_intro, String auth_intro, String pub_intro, int book_page, double total_grade, int grade_peo) {
+			String book_intro, String auth_intro, String pub_intro, int accum_grade, double total_grade, int grade_peo) {
 		super();
 		this.isbn = isbn;
 		this.thum_img = thum_img;
@@ -43,7 +43,7 @@ public class BookVo {
 		this.book_intro = book_intro;
 		this.auth_intro = auth_intro;
 		this.pub_intro = pub_intro;
-		this.book_page = book_page;
+		this.accum_grade = accum_grade;
 		this.total_grade = total_grade;
 		this.grade_peo = grade_peo;
 	}
@@ -52,7 +52,7 @@ public class BookVo {
 	public String toString() {
 		return "BookVo [isbn=" + isbn + ", thum_img=" + thum_img + ", book_name=" + book_name + ", author=" + author
 				+ ", publisher=" + publisher + ", category=" + category + ", book_intro=" + book_intro + ", auth_intro="
-				+ auth_intro + ", pub_intro=" + pub_intro + ", book_page=" + book_page + ", total_grade=" + total_grade
+				+ auth_intro + ", pub_intro=" + pub_intro + ", book_page=" + accum_grade + ", total_grade=" + total_grade
 				+ ", grade_peo=" + grade_peo + "]";
 	}
 
@@ -128,12 +128,12 @@ public class BookVo {
 		this.pub_intro = pub_intro;
 	}
 
-	public int getBook_page() {
-		return book_page;
+	public int getAccum_grade() {
+		return accum_grade;
 	}
 
-	public void setBook_page(int book_page) {
-		this.book_page = book_page;
+	public void setAccum_grade(int accum_grade) {
+		this.accum_grade = accum_grade;
 	}
 
 	public double getTotal_grade() {

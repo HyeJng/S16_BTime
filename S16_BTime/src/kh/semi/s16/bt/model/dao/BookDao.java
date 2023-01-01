@@ -36,7 +36,7 @@ public class BookDao {
 				pstmt.setString(idx++, b.getBook_intro());
 				pstmt.setString(idx++, b.getAuth_intro());
 				pstmt.setString(idx++, b.getPub_intro());
-				pstmt.setInt(idx++, b.getBook_page());
+				pstmt.setInt(idx++, b.getAccum_grade());
 				pstmt.setDouble(idx++, b.getTotal_grade());
 				pstmt.setInt(idx++, b.getGrade_peo());
 			}
@@ -53,7 +53,7 @@ public class BookDao {
 	public int insert(Connection conn, BookVo b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO BOOK VALUES(?,?,?,?,?  ,?,TO_CLOB(?),?,TO_CLOB(?),?,   ?,?)";
+		String query = "INSERT INTO BOOK VALUES(?,?,?,?,?  ,?,TO_CLOB(?),?,TO_CLOB(?),0,0,0)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getIsbn());
@@ -65,9 +65,6 @@ public class BookDao {
 			pstmt.setString(7, b.getBook_intro());  // clob
 			pstmt.setString(8, b.getAuth_intro());
 			pstmt.setString(9, b.getPub_intro());  // clob
-			pstmt.setInt(10, b.getBook_page());
-			pstmt.setDouble(11, b.getTotal_grade());
-			pstmt.setInt(12, b.getGrade_peo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,18 +78,46 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "UPDATE BOOK SET "
-				+ "book_page=?,grade_peo=? WHERE ISBN=?";
+				+ "accum_grade=?,total_grade=?,grade_peo=? WHERE ISBN=?";
+		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, b.getBook_page());
-			pstmt.setInt(2, b.getGrade_peo());
-			pstmt.setString(3, b.getIsbn());
+			pstmt.setInt(1, b.getAccum_grade());
+			pstmt.setDouble(2, b.getTotal_grade());
+			pstmt.setInt(3, b.getGrade_peo());
+			pstmt.setString(4, b.getIsbn());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+	
+	public int updateGrade(Connection conn, BookVo b, String isbn, int grade) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE BOOK SET "
+				+ "accum_grade=?,total_grade=?,grade_peo=? WHERE ISBN=?";
+		
+		int accum = b.getAccum_grade() + grade;
+		int peo = b.getGrade_peo() + 1;
+		double total = accum/(double)peo;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, accum);
+			pstmt.setDouble(2, total);
+			pstmt.setInt(3, peo);
+			pstmt.setString(4, b.getIsbn());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(isbn+"별점 업데이트 완료!! total:"+total);
 		return result;
 	}
 
@@ -134,7 +159,7 @@ public class BookDao {
 					vo.setBook_intro(rs.getString("book_intro"));
 					vo.setAuth_intro(rs.getString("auth_intro"));
 					vo.setPub_intro(rs.getString("pub_intro"));
-					vo.setBook_page(rs.getInt("book_page"));
+					vo.setAccum_grade(rs.getInt("getAccum_grade"));
 					vo.setTotal_grade(rs.getDouble("total_grade"));
 					vo.setGrade_peo(rs.getInt("grade_peo"));
 					volist.add(vo);
@@ -205,7 +230,7 @@ public class BookDao {
 					vo.setBook_intro(rs.getString("book_intro"));
 					vo.setAuth_intro(rs.getString("auth_intro"));
 					vo.setPub_intro(rs.getString("pub_intro"));
-					vo.setBook_page(rs.getInt("book_page"));
+					vo.setAccum_grade(rs.getInt("accum_grade"));
 					vo.setTotal_grade(rs.getDouble("total_grade"));
 					vo.setGrade_peo(rs.getInt("grade_peo"));
 					volist.add(vo);
@@ -244,7 +269,7 @@ public class BookDao {
 					vo.setBook_intro(rs.getString("book_intro"));
 					vo.setAuth_intro(rs.getString("auth_intro"));
 					vo.setPub_intro(rs.getString("pub_intro"));
-					vo.setBook_page(rs.getInt("book_page"));
+					vo.setAccum_grade(rs.getInt("accum_grade"));
 					vo.setTotal_grade(rs.getDouble("total_grade"));
 					vo.setGrade_peo(rs.getInt("grade_peo"));
 					volist.add(vo);
@@ -281,7 +306,7 @@ public class BookDao {
 					vo.setBook_intro(rs.getString("book_intro"));
 					vo.setAuth_intro(rs.getString("auth_intro"));
 					vo.setPub_intro(rs.getString("pub_intro"));
-					vo.setBook_page(rs.getInt("book_page"));
+					vo.setAccum_grade(rs.getInt("accum_grade"));
 					vo.setTotal_grade(rs.getDouble("total_grade"));
 					vo.setGrade_peo(rs.getInt("grade_peo"));
 					volist.add(vo);
@@ -316,7 +341,7 @@ public class BookDao {
 				vo.setBook_intro(rs.getString("book_intro"));
 				vo.setAuth_intro(rs.getString("auth_intro"));
 				vo.setPub_intro(rs.getString("pub_intro"));
-				vo.setBook_page(rs.getInt("book_page"));
+				vo.setAccum_grade(rs.getInt("accum_grade"));
 				vo.setTotal_grade(rs.getDouble("total_grade"));
 				vo.setGrade_peo(rs.getInt("grade_peo"));
 			}
