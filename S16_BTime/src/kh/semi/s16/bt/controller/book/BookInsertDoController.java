@@ -42,7 +42,7 @@ public class BookInsertDoController extends HttpServlet {
 		String book_intro = request.getParameter("book_intro");
 		String auth_intro = request.getParameter("auth_intro");
 		String pub_intro = request.getParameter("pub_intro");
-		int book_page = Integer.parseInt(request.getParameter("book_page"));
+		int accum_grade = Integer.parseInt(request.getParameter("accum_grade"));
 		double total_grade = Double.parseDouble(request.getParameter("total_grade"));
 		int grade_peo = Integer.parseInt(request.getParameter("grade_peo"));
 
@@ -56,7 +56,7 @@ public class BookInsertDoController extends HttpServlet {
 		b.setBook_intro(book_intro);
 		b.setAuth_intro(auth_intro);
 		b.setPub_intro(pub_intro);
-		b.setBook_page(book_page);
+		b.setAccum_grade(accum_grade);
 		b.setTotal_grade(total_grade);
 		b.setGrade_peo(grade_peo);
 		

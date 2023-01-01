@@ -46,7 +46,7 @@ public class LoginDoController extends HttpServlet {
 			System.out.println(id);
 			response.sendRedirect(request.getContextPath() + "/main");
 		}else {
-			//TODO
+			response.sendRedirect(request.getContextPath() + "/alertlogin");
 		}
 	}
 

@@ -143,8 +143,8 @@ public class BookUpdateFromAladinAPIController extends HttpServlet {
 					case "b":
 						vo.setPub_intro(nodeText);
 						break;
-					case "itemPage":
-						vo.setBook_page(Integer.parseInt(nodeText));
+					case "d":
+						vo.setAccum_grade(Integer.parseInt(nodeText));
 						break;
 					case "customerReviewRank":
 						vo.setTotal_grade(Double.parseDouble(nodeText));

@@ -121,6 +121,10 @@
 			var isbn = $("#isbn").text();
 			var rev_txt = $(this).prev().val();
 			var each_grade = $("input[type=radio][name=grade]:checked").val();
+			if(each_grade == null){
+				alert("별점을 남겨주세요!");
+				return;
+			}
 			$.ajax({
 				type : "post"
 				, url : "ReviewInsert.ajax"
