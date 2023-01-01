@@ -27,22 +27,15 @@ public class ReadingNowDeleteDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		
 		System.out.println("readingnow delete do controller");
 		
 		ReadingNowService service = new ReadingNowService();
-		String id = request.getParameter("id");
-		String isbn = request.getParameter("isbn");
+		String id = (String) request.getSession().getAttribute("id");
+		String isbn = request.getParameter("isbn_data");
+		System.out.println("isbn:"+isbn);
 		int result = service.delete(id, isbn);
-		
-		if(result > 0) {
-			String viewPage = "/WEB-INF/view/MyPage/readingnow.jsp";
-			response.sendRedirect(viewPage);
-		}else {
-			//TODO
-		}
+		System.out.println(result);
+		response.sendRedirect(request.getContextPath() + "/readingnow");
 	}
 
 }

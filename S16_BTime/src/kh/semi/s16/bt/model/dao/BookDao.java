@@ -177,7 +177,7 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<BookVo> volist = null;
-		String query = "SELECT B.ISBN, B.BOOK_NAME, B.THUM_IMG, B.AUTHOR, B.PUBLISHER, B.CATEGORY, B.TOTAL_GRADE"
+		String query = "SELECT B.ISBN, B.BOOK_NAME, B.THUM_IMG, B.AUTHOR, B.PUBLISHER, B.CATEGORY, B.TOTAL_GRADE, B.GRADE_PEO"
 				+ " FROM (SELECT ISBN FROM READING_NOW R RIGHT OUTER JOIN MEMBER M ON R.ID=M.ID WHERE M.ID=?) RN JOIN BOOK B"
 				+ " ON RN.ISBN=B.ISBN";
 		try {
@@ -195,6 +195,7 @@ public class BookDao {
 					vo.setPublisher(rs.getString("publisher"));
 					vo.setCategory(rs.getString("category"));
 					vo.setTotal_grade(rs.getDouble("total_grade"));
+					vo.setGrade_peo(rs.getInt("grade_peo"));
 					volist.add(vo);
 				} while (rs.next());
 			}

@@ -21,17 +21,26 @@
 	<ul>
 		<c:forEach items="${brnlist }" var="book" varStatus="status">
 		<li>
-			<img src="${book.thum_img }" alt="${book.book_name }">
 			<div>
-				<p id="book_name">${book.book_name }</p>
-				<p id="author">${book.author }</p>
-				<br>
+				<img src="${book.thum_img }" alt="${book.book_name }">
 				<div>
-					<p id="total_grade">${book.total_grade }</p>
-					<p id="grade_peo"></p>
+					<p class="book_name">${book.book_name }</p>
+					<p class="author">${book.author }</p>
+					<br>
+					<div>
+						<p class="total_grade">${book.total_grade }</p>
+						<p class="grade_peo">${book.grade_peo }</p>
+					</div>
+					<p class="read_page">123/245</p>
+					<p class="readstr_date">${rnlist[status.index].readstr_date }</p>
 				</div>
-				<p id="read_page"></p>
-				<p id="readstr_date">${rnlist[status.index].readstr_date }</p>
+				<div>
+					<button type="button" class="btn_reading">도서 읽기</button>
+					<form action="<%=request.getContextPath() %>/readingnowdelete.do" method="post">
+						<input type="text" value="${book.isbn }" name="isbn_data" class="isbn_data" style="display: none;">
+						<button type="submit" class="btn_reading_delete">삭제</button>
+					</form>
+				</div>
 			</div>
 		</li>
 		</c:forEach>
@@ -42,6 +51,7 @@
 			$('#loveaddList').on("click",loveaddListClickHandler);
 			$('#readingList').on("click",readingListClickHandler);
 			$('#subInfo').on("click",subInfoClickHandler);
+			$('.btn_reading').on("click", readingClickHandler);
 		}
 		function loveaddListClickHandler(){
 			console.log("loveaddListClickHandler");
@@ -54,6 +64,11 @@
 		function subInfoClickHandler(){
 			console.log("subInfoClickHandler");
 			location.href = "<%=request.getContextPath()%>/subscribeinfo";
+		}
+		function readingClickHandler(){
+			var isbn = $('.isbn_data').val();
+			var w = window.open("about:blank", "_blank", "width=800, height=700, resizable=yes" );
+			w. location.href = "<%=request.getContextPath()%>/reading?isbn="+ isbn;
 		}
 	</script>
 </body>
