@@ -26,8 +26,30 @@
 			</div>
 			<br>
 			<div>
-				<p id="total_grade">${bookdetail.total_grade }</p>
-				<p id="grade_peo">${bookdetail.grade_peo }</p>
+				<p id="total_grade">
+					<c:choose>
+						<c:when test="${(bookdetail.total_grade lt 1)}">
+							☆☆☆☆☆
+						</c:when>
+						<c:when test="${(bookdetail.total_grade ge 1) && (bookdetail.total_grade lt 2 )}">
+							★☆☆☆☆
+						</c:when>
+						<c:when test="${(bookdetail.total_grade ge 2) && (bookdetail.total_grade lt 3 ) }">
+							★★☆☆☆
+						</c:when>
+						<c:when test="${(bookdetail.total_grade ge 3) && (bookdetail.total_grade lt 4 ) }">
+							★★★☆☆
+						</c:when>
+						<c:when test="${(bookdetail.total_grade ge 4) && (bookdetail.total_grade lt 5 ) }">
+							★★★★☆
+						</c:when>
+						<c:otherwise>
+							★★★★★
+						</c:otherwise>
+					</c:choose>
+					${bookdetail.total_grade }
+				</p>
+				<p id="grade_peo">(${bookdetail.grade_peo }명)</p>
 			</div>
 		</div>
 		<br>

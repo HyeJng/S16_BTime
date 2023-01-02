@@ -54,7 +54,7 @@
 							</c:choose>
 							${book.total_grade }
 						</p>
-						<p class="grade_peo">${book.grade_peo }</p>
+						<p class="grade_peo">(${book.grade_peo }명)</p>
 					</div>
 					<p class="read_page">123/245</p>
 					<p class="readstr_date">${rnlist[status.index].readstr_date }</p>

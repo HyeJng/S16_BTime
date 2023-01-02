@@ -52,7 +52,7 @@
 							</c:choose>
 						${book.total_grade }
 					</p>
-					<p class="grade_peo">${book.grade_peo }</p>
+					<p class="grade_peo">(${book.grade_peo }명)</p>
 				</div>
 			</div>
 		</li>
