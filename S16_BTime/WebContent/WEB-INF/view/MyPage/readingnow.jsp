@@ -31,7 +31,29 @@
 					<p class="author">${book.author }</p>
 					<br>
 					<div>
-						<p class="total_grade">${book.total_grade }</p>
+						<p class="total_grade">
+							<c:choose>
+								<c:when test="${(book.total_grade lt 1)}">
+									☆☆☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 1) && (book.total_grade lt 2 )}">
+									★☆☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 2) && (book.total_grade lt 3 ) }">
+									★★☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 3) && (book.total_grade lt 4 ) }">
+									★★★☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 4) && (book.total_grade lt 5 ) }">
+									★★★★☆
+								</c:when>
+								<c:otherwise>
+									★★★★★
+								</c:otherwise>
+							</c:choose>
+							${book.total_grade }
+						</p>
 						<p class="grade_peo">${book.grade_peo }</p>
 					</div>
 					<p class="read_page">123/245</p>

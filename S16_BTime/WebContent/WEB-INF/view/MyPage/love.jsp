@@ -25,12 +25,34 @@
 		<li>
 			<img src="${book.thum_img }" alt="${book.book_name }">
 			<div>
-				<p id="book_name">${book.book_name }</p>
-				<p id="author">${book.author }</p>
+				<p class="book_name">${book.book_name }</p>
+				<p class="author">${book.author }</p>
 				<br>
 				<div>
-					<p id="total_grade">${book.total_grade }</p>
-					<p id="grade_peo"></p>
+					<p class="total_grade">
+						<c:choose>
+								<c:when test="${(book.total_grade lt 1)}">
+									☆☆☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 1) && (book.total_grade lt 2 )}">
+									★☆☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 2) && (book.total_grade lt 3 ) }">
+									★★☆☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 3) && (book.total_grade lt 4 ) }">
+									★★★☆☆
+								</c:when>
+								<c:when test="${(book.total_grade ge 4) && (book.total_grade lt 5 ) }">
+									★★★★☆
+								</c:when>
+								<c:otherwise>
+									★★★★★
+								</c:otherwise>
+							</c:choose>
+						${book.total_grade }
+					</p>
+					<p class="grade_peo">${book.grade_peo }</p>
 				</div>
 			</div>
 		</li>
