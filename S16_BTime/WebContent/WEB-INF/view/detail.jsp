@@ -50,12 +50,11 @@
 		<div>
 			<div>
 				<div class="star_grade">
-					<label class="startRadio__box">
-						<input type="radio" name="grade" value="1">
-						<input type="radio" name="grade" value="2">
-						<input type="radio" name="grade" value="3">
-						<input type="radio" name="grade" value="4">
-						<input type="radio" name="grade" value="5">
+					<label class="startRadio__box"> <input type="radio"
+						name="grade" value="1"> <input type="radio" name="grade"
+						value="2"> <input type="radio" name="grade" value="3">
+						<input type="radio" name="grade" value="4"> <input
+						type="radio" name="grade" value="5">
 					</label>
 				</div>
 				<input type="text" name="review_add" value="추천합니다!">
@@ -66,7 +65,25 @@
 				<div>
 					<c:forEach items="${reviewlist }" var="review">
 						<p class="id">${review.id }</p>
-						<p class="each_grade">${review.each_grade }</p>
+						<p class="each_grade">
+							<c:choose>
+								<c:when test="${review.each_grade eq 1 }">
+									★☆☆☆☆
+								</c:when>
+								<c:when test="${review.each_grade eq 2 }">
+									★★☆☆☆
+								</c:when>
+								<c:when test="${review.each_grade eq 3 }">
+									★★★☆☆
+								</c:when>
+								<c:when test="${review.each_grade eq 4 }">
+									★★★★☆
+								</c:when>
+								<c:otherwise>
+									★★★★★
+								</c:otherwise>
+							</c:choose>
+						</p>
 						<p class="rev_txt">${review.rev_txt }</p>
 						<p class="rev_date">${review.rev_date }</p>
 					</c:forEach>
@@ -84,38 +101,27 @@
 		function loveAddClickHandler(){
 			var id = '<%=(String) session.getAttribute("id")%>';
 			var isbn = $("#isbn").text();
-
-			if ($("#loveadd").hasClass("add")) {
-				var add = "no";
-				$.ajax({
-					type : "post",
-					url : "loveadd.ajax",
-					data : {
-						id : id,
-						isbn : isbn,
-						add : add
-					},
-					success : btnSendSuccessCb,
-					error : ajaxErrorCb
-				});
+			var add = null;
+			if($("#loveadd").hasClass("add")){
+				add = "no";
 				$(this).text("찜 해제");
 				$(this).removeClass("add");
-			} else {
-				var add = "yes";
-				$.ajax({
-					type : "post",
-					url : "loveadd.ajax",
-					data : {
-						id : id,
-						isbn : isbn,
-						add : add
-					},
-					success : btnSendSuccessCb,
-					error : ajaxErrorCb
-				});
+			}else{
+				add = "yes";
 				$(this).text("찜");
 				$(this).addClass("add");
 			}
+			$.ajax({
+				type : "post",
+				url : "loveadd.ajax",
+				data : {
+					id : id,
+					isbn : isbn,
+					add : add
+				},
+				success : btnSendSuccessCb,
+				error : ajaxErrorCb
+				});
 		}
 		function reviewAddClickHandler(){
 			var isbn = $("#isbn").text();
