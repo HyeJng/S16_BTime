@@ -24,6 +24,7 @@
 			<c:choose>
 				<c:when test="${empty subinfo }">
 					<h4>현재 이용 중인 구독제가 없습니다!</h4>
+					<button type="button" id="btn_enroll_sub">구독 시작하기</button>
 				</c:when>
 				<c:when test="${subinfo.subType eq 1 }">
 					베이직-30일
