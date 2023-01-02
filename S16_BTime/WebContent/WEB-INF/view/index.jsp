@@ -20,7 +20,6 @@
 	flex-wrap: wrap;
 	text-align: center;
 }
-
 .post_wrapper {
 	display: inline-block;
 	width: 30%;
@@ -95,7 +94,6 @@
 			}
 			function DetailClickHandler(){
 				console.log("DetailClickHandler");
-				var id = '<%=(String) session.getAttribute("id")%>';
 				var isbn = $(this).prev().text();
 				location.href = "<%=request.getContextPath()%>/detail?isbn="+isbn;
 			}
