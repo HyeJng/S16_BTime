@@ -36,7 +36,7 @@ public class MainController extends HttpServlet {
 //		List<BookVo> volist = service.selectList();
 //		request.setAttribute("booklist", volist);
 		
-		int max = 5;
+		int max = 6;
 		List<BookVo> volistBest = service.selectListBest(max);
 		request.setAttribute("bestlist", volistBest);
 		List<BookVo> volistEssay = service.selectListEssay(max);

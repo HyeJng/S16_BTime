@@ -8,6 +8,25 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <script src='./js/jquery-3.6.1.js'></script>
+<style>
+.book_name {
+	border: 0;
+	background-color: transparent;
+}
+
+.bookWrapperContainer {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.post_wrapper {
+	display: inline-block;
+	width: 30%;
+	margin-bottom: 10px;
+}
+</style>
 <%
 	MemberVo vo = (MemberVo) request.getSession().getAttribute("loginInfo");
 %>
@@ -30,41 +49,35 @@
 		<hr>
 		<br>
 		<h4>best seller</h4>
-		<ul>
+		<div class="bookWrapperContainer">
 			<c:forEach items="${bestlist }" var="book">
-				<li>
-					<div class="post_wrapper">
-						<!-- flex -->
-						<div>
-							<img src="${book.thum_img }" alt="${book.book_name }">
-						</div>
-						<div class="book_isbn">${book.isbn }</div>
-						<button type="button" class="book_name">${book.book_name }</button>
-						<div class="book_author">${book.author }</div>
+				<div class="post_wrapper">
+					<div>
+						<img src="${book.thum_img }" alt="${book.book_name }">
 					</div>
-				</li>
+					<div class="book_isbn">${book.isbn }</div>
+					<button type="button" class="book_name">${book.book_name }</button>
+					<div class="book_author">${book.author }</div>
+				</div>
 			</c:forEach>
-		</ul>
+		</div>
 		<hr>
 		<br>
 		<h4>new essay</h4>
-		<ul>
+		<div class="bookWrapperContainer">
 			<c:forEach items="${bookessay }" var="book">
-				<li>
-					<div class="post_wrapper">
-						<!-- flex -->
-						<div>
-							<img src="${book.thum_img }" alt="${book.book_name }">
-						</div>
-						<div class="book_isbn">${book.isbn }</div>
-						<button type="button" class="book_name">${book.book_name }</button>
-						<div class="book_author">${book.author }</div>
+				<div class="post_wrapper">
+					<div>
+						<img src="${book.thum_img }" alt="${book.book_name }">
 					</div>
-				</li>
+					<div class="book_isbn">${book.isbn }</div>
+					<button type="button" class="book_name">${book.book_name }</button>
+					<div class="book_author">${book.author }</div>
+				</div>
 			</c:forEach>
-		</ul>
-		<hr>
+		</div>
 	</div>
+	<hr>
 	<script>
 			$(function(){
 				$('#login').on("click",LoginClickHandler);
@@ -82,14 +95,14 @@
 			}
 			function DetailClickHandler(){
 				console.log("DetailClickHandler");
-				var id = '<%=(String)session.getAttribute("id")%>';
+				var id = '<%=(String) session.getAttribute("id")%>';
 				var isbn = $(this).prev().text();
 				location.href = "<%=request.getContextPath()%>/detail?isbn="+isbn;
 			}
 			function MyPageClickHandler(){
 				console.log("MyPageClickHandler");
 				location.href = "<%=request.getContextPath()%>/love";
-			}
+		}
 	</script>
 </body>
 </html>
