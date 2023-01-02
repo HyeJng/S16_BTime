@@ -27,7 +27,7 @@
 			<br>
 			<div>
 				<p id="total_grade">${bookdetail.total_grade }</p>
-				<p id="grade_peo"></p>
+				<p id="grade_peo">${bookdetail.grade_peo }</p>
 			</div>
 		</div>
 		<br>
@@ -121,7 +121,7 @@
 				},
 				success : btnSendSuccessCb,
 				error : ajaxErrorCb
-				});
+			});
 		}
 		function reviewAddClickHandler(){
 			var isbn = $("#isbn").text();

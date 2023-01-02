@@ -18,6 +18,9 @@
 		<button type="button" id="subInfo">구독 정보</button>
 	</div>
 	<ul>
+		<c:if test="${empty lovelist }">
+			<h4>찜한 도서가 없습니다!</h4>
+		</c:if>
 		<c:forEach items="${lovelist }" var="book">
 		<li>
 			<img src="${book.thum_img }" alt="${book.book_name }">

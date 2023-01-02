@@ -19,6 +19,9 @@
 		</div>
 	</div>
 	<ul>
+		<c:if test="${empty brnlist }">
+			<h4>열람 중인 도서가 없습니다!</h4>
+		</c:if>
 		<c:forEach items="${brnlist }" var="book" varStatus="status">
 		<li>
 			<div>
