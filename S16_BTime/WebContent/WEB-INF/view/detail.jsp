@@ -121,6 +121,7 @@
 			$("#btn_reading").on("click", readingClickHandler);
 		}
 		function loveAddClickHandler(){
+			var id = '<%=(String)request.getSession().getAttribute("id")%>';
 			var isbn = $("#isbn").text();
 			var add = null;
 			if($("#loveadd").hasClass("add")){
