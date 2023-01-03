@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.s16.bt.model.service.BookService;
+import kh.semi.s16.bt.model.service.MemberService;
 import kh.semi.s16.bt.model.service.ReadingNowService;
 import kh.semi.s16.bt.model.vo.BookVo;
+import kh.semi.s16.bt.model.vo.MemberVo;
 import kh.semi.s16.bt.model.vo.ReadingNowVo;
 
 /**
@@ -34,6 +36,13 @@ public class ReadingNowBookOpenController extends HttpServlet {
 		
 		String id = (String) request.getSession().getAttribute("id");
 		String isbn = request.getParameter("isbn");
+		
+		MemberService mservice = new MemberService();
+		MemberVo m = mservice.selectOne(id);
+		if((m.getIssub()).equals("N")) {
+			return;
+		}
+		
 		ReadingNowService rservice = new ReadingNowService();
 		ReadingNowVo rn = rservice.selectOne(id, isbn);
 		request.setAttribute("readingInfo", rn);
