@@ -64,9 +64,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 //    		dataType : "jsonp",
 //    		url : "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx",
 //    		data : {
-//    			//TTBKey : "ttbcmqlfkd_1542001",
-//    			//TTBKey : "ttbto66931826001",
-//    			TTBKey : "ttbhagalaz04301822001",
+//    			TTBKey : "TTBKey작성",
 //    			ItemId : "9791130689890",
 //    			//ItemIdType: "9791130689890",
 //    			Cover:"Big",
@@ -77,14 +75,12 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 //    			callback : "abc"
 //    		}
 
-			// 베스트셀러 목록
+		// 베스트셀러 목록
 //    		method : "get",
 //    		dataType : "jsonp",
 //    		url : "http://www.aladin.co.kr/ttb/api/ItemList.aspx",
 //    		data : {
-//    			//TTBKey : "ttbcmqlfkd_1542001",
-//    			//TTBKey : "ttbto66931826001",
-//    			TTBKey : "ttbhagalaz04301822001",
+//    			TTBKey : "TTBKey작성",
 //    			QueryType : "Bestseller",
 //    			SearchTarget:"Book",
 //    			output : "JS",
@@ -138,7 +134,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 			List<BookVo> volist = new ArrayList<BookVo>();
 			for (int i = 0; i < list.getLength(); i++) {
 
-//				list.item(i)의 결과를 변수명 item에 대입해주세요.
+//				list.item(i)의 결과를 변수명 item에 대입
 				Node item = list.item(i);
 				// NullPointException 은 . 앞이 null 이어서 오류발생
 				Node n = item.getFirstChild(); // deathCnt
@@ -201,7 +197,7 @@ public class BookInsertFromAladinAPIController extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	} // 메소드 닫힘 f2
+	} // 메소드 닫힘
 
 	// 기본자세 - 메소드정의 - 첫번째 return type 확인 void 아니면 return
 	// InputStream 형태의 객체를 Document 바꿔줌
